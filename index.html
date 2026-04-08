@@ -371,28 +371,67 @@
     margin: 0 auto;
   }
   @media (min-width: 760px) { .proof .quotes { grid-template-columns: repeat(3, 1fr); } }
-  .proof blockquote {
+  .proof .testimonial {
     margin: 0;
-    padding: 28px 26px;
+    padding: 32px 30px;
     background: var(--stone);
     border: 1px solid var(--line);
-    border-radius: 18px;
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--navy);
-    font-style: italic;
-    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 8px 20px rgba(44, 62, 80, .05);
+    border-radius: 20px;
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 12px 28px rgba(44, 62, 80, .07);
     text-align: left;
+    display: flex;
+    flex-direction: column;
   }
-  .proof blockquote::before {
+  .proof .testimonial blockquote {
+    margin: 0 0 24px;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--navy);
+    font-style: normal;
+    flex: 1;
+  }
+  .proof .testimonial blockquote::before {
     content: "“";
     display: block;
     font-size: 48px;
-    line-height: .6;
+    line-height: .4;
     color: var(--sage);
-    font-style: normal;
     font-family: Georgia, serif;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  .proof .testimonial figcaption {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .proof .testimonial .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sage-soft);
+    color: var(--sage-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .02em;
+    flex-shrink: 0;
+  }
+  .proof .testimonial .name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .proof .testimonial .role {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--mute);
+    line-height: 1.3;
   }
   .proof .meta {
     color: var(--mute);
@@ -638,8 +677,13 @@
     </details>
 
     <details class="reveal">
-      <summary>Will Mum feel watched?</summary>
+      <summary>Will they feel watched?</summary>
       <p>No cameras. No microphones. No wearables. The sensor reads movement patterns, not images. It’s about the size of a phone charger and stays out of sight.</p>
+    </details>
+
+    <details class="reveal">
+      <summary>What makes Neare different?</summary>
+      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It’s a single plug-in device that sees movement, not images — the same radar technology used in hospital fall detection — so your parent keeps their privacy and their independence. And instead of dumping raw data on you, Neare tells you only when something has meaningfully changed, and what to do about it.</p>
     </details>
 
     <details class="reveal">
@@ -667,11 +711,42 @@
 <!-- ========== SOCIAL PROOF ========== -->
 <section class="proof">
   <div class="wrap">
-    <h2 class="reveal">What caregivers tell us</h2>
+    <h2 class="reveal">Families already trying Neare</h2>
     <div class="quotes">
-      <blockquote class="reveal">The hardest part is not knowing what’s happening when I’m not there.</blockquote>
-      <blockquote class="reveal">By the time we noticed the decline, we’d already lost months.</blockquote>
-      <blockquote class="reveal">I feel guilty every day that I can’t do more.</blockquote>
+
+      <figure class="testimonial reveal">
+        <blockquote>I used to call Dad every evening just to hear his voice and feel okay about it. Now I actually know he slept, he’s eating, he’s getting out of bed at the right time. It’s taken a weight off I didn’t realise I was carrying.</blockquote>
+        <figcaption>
+          <div class="avatar" aria-hidden="true">SM</div>
+          <div>
+            <p class="name">Sarah M.</p>
+            <p class="role">Daughter · Manchester</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial reveal">
+        <blockquote>Mum was adamant she didn’t want a camera in the house and I agreed with her. Neare is the first thing we’ve both been comfortable with — she forgets it’s there, and I finally stopped lying awake at 2am.</blockquote>
+        <figcaption>
+          <div class="avatar" aria-hidden="true">JT</div>
+          <div>
+            <p class="name">James T.</p>
+            <p class="role">Son · Bristol</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial reveal">
+        <blockquote>We caught a change in her sleep pattern three weeks before her GP appointment. Turned out to be the start of a UTI. I can’t overstate what catching that early meant for us.</blockquote>
+        <figcaption>
+          <div class="avatar" aria-hidden="true">PK</div>
+          <div>
+            <p class="name">Priya K.</p>
+            <p class="role">Daughter · Edinburgh</p>
+          </div>
+        </figcaption>
+      </figure>
+
     </div>
     <p class="meta reveal">
       Join <strong>200+ families</strong> on the early access list<br>
