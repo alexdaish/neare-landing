@@ -83,6 +83,19 @@
   .hero {
     padding: 72px 0 88px;
     background: var(--stone);
+    background-image:
+      linear-gradient(to bottom, rgba(245,240,232,.88) 0%, rgba(245,240,232,.7) 60%, rgba(245,240,232,.5) 100%),
+      url('assets/hero-bg-800.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      background-image:
+        linear-gradient(to right, rgba(245,240,232,.93) 0%, rgba(245,240,232,.78) 45%, rgba(245,240,232,.4) 100%),
+        url('assets/hero-bg.jpg');
+      background-position: center right;
+    }
   }
   .hero-grid {
     display: grid;
@@ -485,7 +498,7 @@
     height: 70%;
     top: 15%;
     left: -5%;
-    background: radial-gradient(closest-side, rgba(143, 169, 143, .18), transparent 70%);
+    background: radial-gradient(closest-side, rgba(245, 240, 232, .5), transparent 70%);
     pointer-events: none;
   }
   .phone-stage::after {
