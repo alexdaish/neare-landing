@@ -79,9 +79,39 @@
     margin: 0 0 18px;
   }
 
+  /* ---------- SITE HEADER ---------- */
+  .site-header {
+    padding: 28px 0 48px;
+    position: relative;
+    z-index: 10;
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wordmark {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -.02em;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .header-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--sage-deep);
+    font-weight: 600;
+    background: var(--sage-soft);
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
   /* ---------- HERO ---------- */
   .hero {
-    padding: 72px 0 88px;
+    padding: 0 0 88px;
     background: var(--stone);
     background-image:
       linear-gradient(to bottom, rgba(245,240,232,.88) 0%, rgba(245,240,232,.7) 60%, rgba(245,240,232,.5) 100%),
@@ -314,6 +344,44 @@
     color: var(--navy-soft);
     font-size: 16px;
     line-height: 1.65;
+  }
+
+  /* ---------- WHAT'S INCLUDED ---------- */
+  .included { background: var(--stone); }
+  .included h2 { text-align: center; margin-bottom: 56px; }
+  .included-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  @media (min-width: 760px) { .included-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+  .included-card {
+    background: var(--stone-warm);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 12px 32px rgba(44, 62, 80, .06);
+    display: flex;
+    flex-direction: column;
+  }
+  .included-card .card-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+    color: var(--sage-deep);
+  }
+  .included-card h3 { font-size: 20px; margin-bottom: 10px; }
+  .included-card p { color: var(--navy-soft); font-size: 16px; margin: 0 0 8px; line-height: 1.6; }
+  .included-card p:last-child { margin-bottom: 0; }
+  .included-card .detail {
+    font-size: 13px;
+    color: var(--mute);
+    margin: auto 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    line-height: 1.5;
   }
 
   /* ---------- PRICING ---------- */
@@ -830,9 +898,14 @@
 
 <!-- ========== HERO ========== -->
 <section class="hero">
+  <header class="site-header">
+    <div class="wrap site-header-inner">
+      <a href="/" class="wordmark">neare</a>
+      <span class="header-tag">Early access</span>
+    </div>
+  </header>
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
-      <p class="eyebrow">Neare · Early access</p>
       <h1 data-hero-h1>See what a phone call can’t.</h1>
       <p class="lede" data-hero-lede>Neare quietly monitors your parent’s daily patterns at home — no cameras, no intrusion — and tells you when something changes. So you can act early, not react late.</p>
 
@@ -1090,6 +1163,41 @@
       <summary>Is it worth £29 a month?</summary>
       <p>Most families already spend £50–150 a month on care support. Neare costs less than a weekly cleaner — and it’s watching every hour, not just one afternoon.</p>
     </details>
+  </div>
+</section>
+
+<!-- ========== WHAT'S INCLUDED ========== -->
+<section class="included">
+  <div class="wrap">
+    <h2 class="reveal">What's included</h2>
+    <div class="included-grid">
+
+      <article class="included-card reveal">
+        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="20" y="18" width="24" height="28" rx="6"/>
+          <circle cx="32" cy="30" r="3.5"/>
+          <path d="M32 42h.01"/>
+          <path d="M44 34c3 0 5-2 5-5M20 34c-3 0-5-2-5-5"/>
+        </svg>
+        <h3>The Neare sensor</h3>
+        <p>A small, matte-white device about the size of a candle. No screen, no LEDs, no buttons. Plug it in, place it on a shelf or side table, and forget it's there.</p>
+        <p>It uses radar — not cameras or microphones — to read movement patterns throughout the home. Your parent's privacy stays completely intact.</p>
+        <p class="detail">Included with your subscription · No upfront cost · Plug-in, no installation</p>
+      </article>
+
+      <article class="included-card reveal">
+        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="18" y="10" width="28" height="44" rx="6"/>
+          <path d="M26 24h12M26 32h12M26 40h8"/>
+          <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
+        </svg>
+        <h3>The Neare app</h3>
+        <p>A calm, clear window into your parent's daily rhythm. See at a glance whether their day looks normal — and get guidance when something shifts.</p>
+        <p>Share updates with family members. Export GP-ready summaries in one tap. No data overload, just the information that matters.</p>
+        <p class="detail">iOS + Android · Invite up to 5 family members · Weekly email summaries</p>
+      </article>
+
+    </div>
   </div>
 </section>
 
