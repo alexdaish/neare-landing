@@ -470,6 +470,333 @@
   .foot a:hover { color: var(--navy); }
   .foot p { margin: 0; }
 
+  /* ---------- PHONE MOCKUP (reusable component) ---------- */
+  .phone-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .phone-stage::before {
+    content: "";
+    position: absolute;
+    width: 110%;
+    height: 70%;
+    top: 15%;
+    left: -5%;
+    background: radial-gradient(closest-side, rgba(143, 169, 143, .18), transparent 70%);
+    pointer-events: none;
+  }
+  .phone-stage::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    height: 18px;
+    background: radial-gradient(ellipse at center, rgba(44, 62, 80, .14), transparent 70%);
+    pointer-events: none;
+  }
+  .phone {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    background: linear-gradient(180deg, #344558 0%, #2C3E50 50%, #1E2B38 100%);
+    border-radius: 42px;
+    padding: 9px;
+    box-shadow:
+      0 2px 4px rgba(44, 62, 80, .08),
+      0 24px 60px rgba(44, 62, 80, .22),
+      inset 0 1px 0 rgba(255, 255, 255, .08);
+  }
+  .phone.tilted { transform: rotate(-2deg); }
+  .phone-screen {
+    background: var(--stone);
+    border-radius: 34px;
+    padding: 22px 18px 14px;
+    overflow: hidden;
+    position: relative;
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 22px;
+    background: #1E2B38;
+    border-radius: 12px;
+    z-index: 2;
+  }
+  .phone-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0 18px;
+  }
+  .phone-brand { font-size: 14px; font-weight: 700; color: var(--navy); letter-spacing: -.01em; }
+  .phone-icon-btn {
+    width: 22px !important; height: 22px !important;
+    min-width: 22px;
+    flex-shrink: 0;
+    color: var(--navy-soft);
+  }
+  .phone-title {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: var(--navy);
+    margin: 0 0 12px;
+    line-height: 1.1;
+  }
+  .phone-back {
+    font-size: 12px;
+    color: var(--sage-deep);
+    font-weight: 600;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .phone-pill {
+    background: var(--sage-soft);
+    color: var(--sage-deep);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 9px 14px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+  .phone-label {
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: 9px;
+    color: var(--mute);
+    font-weight: 600;
+    margin: 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .phone-label .time { font-size: 8px; text-transform: none; letter-spacing: 0; font-weight: 500; }
+
+  .phone-card {
+    background: var(--stone-warm);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .rhythm-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    font-size: 11px;
+    color: var(--navy);
+    margin-top: 4px;
+  }
+  .rhythm-row .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .rhythm-row .item.done { color: var(--sage-deep); font-weight: 600; }
+  .rhythm-row .item.mute { color: var(--mute); }
+  .rhythm-row svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .rhythm-bars {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 4px;
+    height: 22px;
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+  .rhythm-bars span {
+    flex: 1;
+    background: var(--sage);
+    opacity: .35;
+    border-radius: 2px;
+  }
+  .rhythm-bars span:nth-child(2) { opacity: .55; }
+  .rhythm-bars span:nth-child(3) { opacity: .25; }
+
+  .phone-alert {
+    background: var(--stone-warm);
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: auto;
+    margin-bottom: 14px;
+  }
+  .phone-alert-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.35;
+    margin: 0 0 4px;
+  }
+  .phone-alert-sub {
+    font-size: 11px;
+    color: var(--mute);
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+  .phone-btn {
+    display: block;
+    background: var(--terracotta);
+    color: #fff;
+    border-radius: 11px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(168, 95, 66, .22);
+  }
+  .phone-dismiss {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mute);
+    margin-top: 8px;
+  }
+  .phone-tabs {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .phone-tab {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--mute);
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .phone-tab svg { width: 14px; height: 14px; }
+  .phone-tab.active { color: var(--navy); }
+
+  /* Variant B phone content — "What should I do?" */
+  .context-card {
+    background: var(--stone-warm);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .context-card .phone-label { margin-bottom: 6px; }
+  .context-card p {
+    font-size: 11.5px;
+    color: var(--navy);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .alert-hero {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--stone-warm);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .alert-hero svg { width: 18px; height: 18px; color: var(--sage-deep); flex-shrink: 0; margin-top: 1px; }
+  .alert-hero p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+  .guided {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .guided-step {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .guided-step .num {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sage);
+    letter-spacing: -.02em;
+    line-height: 1.1;
+  }
+  .guided-step .step-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .guided-step .speech {
+    background: #fff;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: var(--navy);
+    font-style: italic;
+  }
+  .guided-step .link-like {
+    font-size: 11px;
+    color: var(--sage-deep);
+    border-bottom: 1px solid var(--sage);
+    padding-bottom: 1px;
+    display: inline-block;
+  }
+  .guided-step .phone-btn { padding: 9px 12px; font-size: 11px; }
+  .phone-closer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mute);
+    padding: 14px 0 10px;
+    font-style: italic;
+  }
+
+  /* ---------- IN-PRACTICE SHOWCASE ---------- */
+  .practice {
+    background: var(--stone);
+    padding-top: 48px;
+  }
+  .practice-grid {
+    display: grid;
+    gap: 48px;
+    align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) {
+    .practice-grid { grid-template-columns: 1fr .9fr; gap: 72px; }
+  }
+  .practice-copy .eyebrow { margin-bottom: 14px; }
+  .practice-copy h2 { margin-bottom: 18px; }
+  .practice-copy p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--navy-soft);
+    margin-bottom: 14px;
+  }
+  .practice-copy .pull {
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 500;
+    border-left: 3px solid var(--sage);
+    padding-left: 18px;
+    margin: 24px 0 0;
+  }
+
   /* ---------- FADE-IN ON SCROLL ---------- */
   .reveal {
     opacity: 0;
@@ -507,76 +834,60 @@
     </div>
 
     <div class="hero-art reveal" aria-hidden="true">
-      <!-- Warm hand-drawn feel: living room interior with sensor + phone notification -->
-      <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="glow" cx=".35" cy=".55" r=".55">
-            <stop offset="0" stop-color="#8FA98F" stop-opacity=".22"/>
-            <stop offset="1" stop-color="#8FA98F" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <!-- soft ground shadow -->
-        <ellipse cx="240" cy="420" rx="200" ry="14" fill="#2C3E50" opacity=".06"/>
-        <!-- ambient glow behind sensor -->
-        <circle cx="170" cy="260" r="170" fill="url(#glow)"/>
+      <div class="phone-stage">
+        <div class="phone tilted">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-head">
+              <span class="phone-brand">neare</span>
+              <svg class="phone-icon-btn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <p class="phone-title">Today</p>
+            <span class="phone-pill">✓ Mum's day looks normal</span>
 
-        <!-- window suggestion -->
-        <g stroke="#2C3E50" stroke-opacity=".15" fill="none" stroke-width="2" stroke-linecap="round">
-          <path d="M60 70 Q80 40 120 45 T200 55"/>
-          <path d="M70 100 Q100 75 140 82 T210 95"/>
-        </g>
+            <div class="phone-card">
+              <p class="phone-label">Daily rhythm <span class="time">Updated 08:14</span></p>
+              <div class="rhythm-bars">
+                <span style="height:60%"></span>
+                <span style="height:85%"></span>
+                <span style="height:40%"></span>
+                <span style="height:70%"></span>
+                <span style="height:55%"></span>
+                <span style="height:90%"></span>
+                <span style="height:75%"></span>
+              </div>
+              <div class="rhythm-row">
+                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Morning routine</span>
+                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Active around house</span>
+                <span class="item mute">○ Afternoon rest</span>
+                <span class="item mute">○ Evening</span>
+              </div>
+            </div>
 
-        <!-- side table -->
-        <path d="M60 330 Q240 322 420 332 L420 344 Q240 336 60 344 Z" fill="#C9B99A"/>
-        <path d="M90 344 L98 430" stroke="#A38E6A" stroke-width="6" stroke-linecap="round" fill="none"/>
-        <path d="M390 344 L382 430" stroke="#A38E6A" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <div class="phone-alert">
+              <p class="phone-alert-title">Mum's been getting up at night more often this week.</p>
+              <p class="phone-alert-sub">3 nights in the last 7 — up from her usual 1.</p>
+              <span class="phone-btn">What should I do?</span>
+              <p class="phone-dismiss">Dismiss</p>
+            </div>
 
-        <!-- plant on left -->
-        <g transform="translate(70,240)">
-          <path d="M30 90 Q15 50 20 10 Q28 40 32 80" stroke="#6E8A6D" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M32 90 Q50 55 45 18 Q38 48 34 82" stroke="#8FA98F" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M34 90 Q55 70 60 40" stroke="#6E8A6D" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M8 88 Q30 84 56 88 L52 112 Q30 116 12 112 Z" fill="#C87A5C"/>
-        </g>
-
-        <!-- sensor (centre-left on table) -->
-        <g>
-          <!-- radar rings -->
-          <circle cx="170" cy="300" r="56" fill="none" stroke="#8FA98F" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="2 4"/>
-          <circle cx="170" cy="300" r="34" fill="none" stroke="#8FA98F" stroke-opacity=".55" stroke-width="1.5"/>
-          <!-- body -->
-          <rect x="148" y="286" width="44" height="46" rx="10" fill="#FBFAF6" stroke="#2C3E50" stroke-opacity=".18" stroke-width="1.5"/>
-          <circle cx="170" cy="304" r="5" fill="#8FA98F"/>
-          <circle cx="170" cy="304" r="2" fill="#FBFAF6"/>
-          <line x1="162" y1="318" x2="178" y2="318" stroke="#2C3E50" stroke-opacity=".2" stroke-width="1.2"/>
-          <line x1="162" y1="324" x2="178" y2="324" stroke="#2C3E50" stroke-opacity=".14" stroke-width="1.2"/>
-        </g>
-
-        <!-- phone leaning against something on the right -->
-        <g transform="translate(280,160) rotate(-4)">
-          <rect x="0" y="0" width="112" height="200" rx="22" fill="#2C3E50"/>
-          <rect x="5" y="5" width="102" height="190" rx="17" fill="#F5F0E8"/>
-          <!-- notch -->
-          <rect x="46" y="13" width="20" height="4" rx="2" fill="#2C3E50" opacity=".3"/>
-          <!-- notification card -->
-          <g transform="translate(12,32)">
-            <rect x="0" y="0" width="88" height="68" rx="12" fill="#FBFAF6" stroke="#2C3E50" stroke-opacity=".08"/>
-            <circle cx="14" cy="16" r="6" fill="#8FA98F"/>
-            <text x="24" y="19" font-family="DM Sans, sans-serif" font-size="8" font-weight="700" fill="#2C3E50">Neare</text>
-            <text x="24" y="30" font-family="DM Sans, sans-serif" font-size="7" fill="#6B7A88">Just now</text>
-            <text x="8" y="46" font-family="DM Sans, sans-serif" font-size="8" font-weight="600" fill="#2C3E50">Mum slept well.</text>
-            <text x="8" y="58" font-family="DM Sans, sans-serif" font-size="7" fill="#6B7A88">Routine steady</text>
-            <text x="8" y="66" font-family="DM Sans, sans-serif" font-size="7" fill="#6B7A88">this week.</text>
-          </g>
-          <!-- second gentle nudge card -->
-          <g transform="translate(12,112)">
-            <rect x="0" y="0" width="88" height="48" rx="12" fill="#E4ECE2" stroke="#8FA98F" stroke-opacity=".3"/>
-            <text x="8" y="16" font-family="DM Sans, sans-serif" font-size="6.5" font-weight="700" fill="#6E8A6D">GENTLE NUDGE</text>
-            <text x="8" y="30" font-family="DM Sans, sans-serif" font-size="7.5" fill="#2C3E50">Morning routine</text>
-            <text x="8" y="40" font-family="DM Sans, sans-serif" font-size="7.5" fill="#2C3E50">shifted slightly.</text>
-          </g>
-        </g>
-      </svg>
+            <div class="phone-tabs">
+              <span class="phone-tab active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Today
+              </span>
+              <span class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-8"/></svg>
+                Summary
+              </span>
+              <span class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                Family
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -626,6 +937,82 @@
         <p>When something shifts, Neare tells you what changed, what it might mean, and what to do. Share a GP-ready summary in one tap.</p>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<!-- ========== IN PRACTICE ========== -->
+<section class="practice">
+  <div class="wrap">
+    <div class="practice-grid">
+      <div class="practice-copy reveal">
+        <p class="eyebrow">In practice</p>
+        <h2>Not just alerts.<br>Guidance you can act on.</h2>
+        <p>When Neare spots a change, it doesn't just flag it. It explains what's different, why it might matter, and gives you a clear next step — so you never feel helpless.</p>
+        <p>No medical jargon. No data overload. Just a calm, clear voice saying: here's what's happening, and here's what you can do.</p>
+        <p class="pull">"Dad's been getting up more at night. Here's what that might mean — and a summary you can share with his GP."</p>
+      </div>
+      <div class="phone-stage reveal">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-back">
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 2L4 8l6 6"/></svg>
+              Back to Today
+            </div>
+            <div class="alert-hero">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              <p>Dad's been getting up at night more often this week.</p>
+            </div>
+
+            <div class="context-card">
+              <p class="phone-label">What we noticed</p>
+              <p>Night-time movement increased to 3 of the last 7 nights — up from his usual average of 1. The pattern started 5 days ago.</p>
+            </div>
+
+            <div class="guided">
+              <div class="guided-step">
+                <span class="num">1</span>
+                <div>
+                  <p class="step-title">Have a gentle conversation</p>
+                  <div class="speech">"Dad, have you been sleeping okay? I noticed you've been a bit restless."</div>
+                </div>
+              </div>
+              <div class="guided-step">
+                <span class="num">2</span>
+                <div>
+                  <p class="step-title">Check for common causes</p>
+                  <div class="speech">Pain, new medication, needing the loo more, anxiety — all worth ruling out.</div>
+                </div>
+              </div>
+              <div class="guided-step">
+                <span class="num">3</span>
+                <div>
+                  <p class="step-title">Share with his GP</p>
+                  <span class="phone-btn" style="display:inline-block;width:auto;margin-top:6px;">Share GP-ready summary</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="phone-closer">Neare gives you the words — not just the data.</p>
+
+            <div class="phone-tabs">
+              <span class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Today
+              </span>
+              <span class="phone-tab active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                Guidance
+              </span>
+              <span class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                Family
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
