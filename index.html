@@ -14,6 +14,24 @@
 <link rel="preload" as="image" href="assets/hero-bg-800.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="assets/hero-bg.webp" media="(min-width: 900px)">
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1892352458820371');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <style>
   :root {
     --sage: #8FA98F;
@@ -1387,6 +1405,7 @@
         .then(function () {
           form.classList.add('success');
           msg.textContent = "You're on the list — we'll be in touch.";
+          if (typeof fbq === 'function') fbq('track', 'Lead');
         })
         .catch(function (err) {
           btn.disabled = false;
