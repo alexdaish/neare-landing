@@ -1386,6 +1386,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       btn.disabled = true;
       msg.textContent = 'Adding you to the list…';
 
+      var eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+
       fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1394,7 +1396,9 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           variant: variant,
           utm_source: utm.utm_source,
           utm_medium: utm.utm_medium,
-          utm_campaign: utm.utm_campaign
+          utm_campaign: utm.utm_campaign,
+          event_id: eventId,
+          page_url: window.location.href
         })
       })
         .then(function (r) {
@@ -1405,7 +1409,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         .then(function () {
           form.classList.add('success');
           msg.textContent = "You're on the list — we'll be in touch.";
-          if (typeof fbq === 'function') fbq('track', 'Lead');
+          if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
         })
         .catch(function (err) {
           btn.disabled = false;

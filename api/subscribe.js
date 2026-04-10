@@ -44,6 +44,8 @@ export default async function handler(req, res) {
     AIRTABLE_TABLE_NAME = 'Waitlist',
     RESEND_API_KEY,
     RESEND_FROM = 'Neare <hello@getneare.com>',
+    FB_ACCESS_TOKEN,
+    FB_PIXEL_ID = '1892352458820371',
   } = process.env;
 
   if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
@@ -111,5 +113,51 @@ export default async function handler(req, res) {
     }
   }
 
+  // 3. Best-effort Facebook Conversions API event
+  if (FB_ACCESS_TOKEN) {
+    try {
+      const eventId = clean(body.event_id, 64) || `lead_${Date.now()}`;
+      const fbRes = await fetch(
+        `https://graph.facebook.com/v22.0/${FB_PIXEL_ID}/events?access_token=${FB_ACCESS_TOKEN}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            data: [
+              {
+                event_name: 'Lead',
+                event_time: Math.floor(Date.now() / 1000),
+                event_id: eventId,
+                action_source: 'website',
+                event_source_url: clean(body.page_url, 2048) || 'https://getneare.com',
+                user_data: {
+                  em: [await sha256(email)],
+                  client_ip_address: ip,
+                  client_user_agent: clean(req.headers['user-agent'], 512),
+                },
+              },
+            ],
+          }),
+        }
+      );
+      if (!fbRes.ok) {
+        const text = await fbRes.text();
+        console.error('FB CAPI error', fbRes.status, text);
+      }
+    } catch (e) {
+      console.error('FB CAPI threw', e);
+    }
+  }
+
   res.status(200).json({ ok: true });
+}
+
+async function sha256(str) {
+  const buf = await globalThis.crypto.subtle.digest(
+    'SHA-256',
+    new TextEncoder().encode(str)
+  );
+  return Array.from(new Uint8Array(buf))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 }
