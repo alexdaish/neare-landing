@@ -70,11 +70,15 @@ export default async function handler(req, res) {
             {
               fields: {
                 Email: email,
-                'Signed Up': new Date().toISOString(),
                 Variant: variant,
                 'UTM Source': clean(body.utm_source),
                 'UTM Medium': clean(body.utm_medium),
                 'UTM Campaign': clean(body.utm_campaign),
+                'UTM Content': clean(body.utm_content),
+                'UTM Term': clean(body.utm_term),
+                Referrer: clean(body.referrer),
+                'User Agent': clean(req.headers['user-agent'], 512),
+                IP: ip,
               },
             },
           ],
