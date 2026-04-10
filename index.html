@@ -11,6 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 
+<link rel="preload" as="image" href="assets/hero-bg-800.webp" media="(max-width: 899px)">
+<link rel="preload" as="image" href="assets/hero-bg.webp" media="(min-width: 900px)">
+
 <style>
   :root {
     --sage: #8FA98F;
@@ -115,7 +118,7 @@
     background: var(--stone);
     background-image:
       linear-gradient(to bottom, rgba(245,240,232,.88) 0%, rgba(245,240,232,.7) 60%, rgba(245,240,232,.5) 100%),
-      url('assets/hero-bg-800.jpg');
+      url('assets/hero-bg-800.webp');
     background-size: cover;
     background-position: center;
   }
@@ -123,7 +126,7 @@
     .hero {
       background-image:
         linear-gradient(to right, rgba(245,240,232,.93) 0%, rgba(245,240,232,.78) 45%, rgba(245,240,232,.4) 100%),
-        url('assets/hero-bg.jpg');
+        url('assets/hero-bg.webp');
       background-position: center right;
     }
   }
