@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
   if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
     console.error('Missing Airtable env vars');
-    res.status(500).json({ error: 'server_misconfigured' });
+    res.status(500).json({ error: 'server_misconfigured', detail: 'missing_airtable_env' });
     return;
   }
 
@@ -151,7 +151,7 @@ export default async function handler(req, res) {
   if (airtableOk) {
     res.status(200).json({ ok: true });
   } else {
-    res.status(500).json({ error: 'storage_failed' });
+    res.status(500).json({ error: 'storage_failed', detail: 'airtable_write_failed' });
   }
 }
 

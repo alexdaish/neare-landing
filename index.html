@@ -1404,7 +1404,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       })
         .then(function (r) {
           if (r.status === 429) throw new Error('rate');
-          if (!r.ok) throw new Error('server');
+          if (!r.ok) return r.json().then(function (d) { throw new Error(d.detail || 'server'); });
           return r.json();
         })
         .then(function () {
