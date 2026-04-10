@@ -55,6 +55,7 @@ export default async function handler(req, res) {
   }
 
   // 1. Write to Airtable (native fetch, Node 18+)
+  let airtableOk = false;
   try {
     const airtableRes = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`,
@@ -84,13 +85,11 @@ export default async function handler(req, res) {
     if (!airtableRes.ok) {
       const text = await airtableRes.text();
       console.error('Airtable error', airtableRes.status, text);
-      res.status(500).json({ error: 'storage_failed' });
-      return;
+    } else {
+      airtableOk = true;
     }
   } catch (e) {
     console.error('Airtable fetch threw', e);
-    res.status(500).json({ error: 'storage_failed' });
-    return;
   }
 
   // 2. Best-effort confirmation email via Resend SDK
@@ -149,7 +148,11 @@ export default async function handler(req, res) {
     }
   }
 
-  res.status(200).json({ ok: true });
+  if (airtableOk) {
+    res.status(200).json({ ok: true });
+  } else {
+    res.status(500).json({ error: 'storage_failed' });
+  }
 }
 
 async function sha256(str) {

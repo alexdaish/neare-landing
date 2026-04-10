@@ -1387,6 +1387,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       msg.textContent = 'Adding you to the list…';
 
       var eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
 
       fetch('/api/subscribe', {
         method: 'POST',
@@ -1409,7 +1410,6 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         .then(function () {
           form.classList.add('success');
           msg.textContent = "You're on the list — we'll be in touch.";
-          if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
         })
         .catch(function (err) {
           btn.disabled = false;
