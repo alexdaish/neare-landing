@@ -2,7 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/b", "destination": "/variant-b.html" }
+    { "source": "/b", "destination": "/variant-b.html" },
+    { "source": "/de", "destination": "/de.html" }
   ],
   "headers": [
     {
