@@ -10,6 +10,25 @@ function clean(v, max = 256) {
   return v.slice(0, max);
 }
 
+const EMAILS = {
+  en: {
+    subject: "You're on the Neare early access list",
+    text:
+      "Thanks for joining the Neare waitlist.\n\n" +
+      "We're building a new way for families to notice early signs of cognitive change at home — no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
+      "We'll be in touch when early access opens.\n\n" +
+      '— The Neare team',
+  },
+  de: {
+    subject: 'Du bist auf der Neare-Frühzugangsliste',
+    text:
+      'Vielen Dank, dass du dich für den Neare-Frühzugang angemeldet hast.\n\n' +
+      'Wir entwickeln eine neue Möglichkeit für Familien, frühzeitig Veränderungen im Alltag ihrer Eltern zu bemerken — ohne Kameras, ohne Wearables, nur ein stiller Sensor und eine App, die dich informiert, wenn etwas Wichtiges passiert.\n\n' +
+      'Wir melden uns, sobald der Frühzugang startet.\n\n' +
+      '— Das Neare-Team',
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'method_not_allowed' });
@@ -37,6 +56,7 @@ export default async function handler(req, res) {
   }
 
   const variant = clean(body.variant, 8) === 'B' ? 'B' : 'A';
+  const locale = clean(body.locale, 8) === 'de' ? 'de' : 'en';
 
   const {
     AIRTABLE_API_KEY,
@@ -71,6 +91,7 @@ export default async function handler(req, res) {
               fields: {
                 Email: email,
                 Variant: variant,
+                Locale: locale,
                 'UTM Source': clean(body.utm_source),
                 'UTM Medium': clean(body.utm_medium),
                 'UTM Campaign': clean(body.utm_campaign),
@@ -100,15 +121,12 @@ export default async function handler(req, res) {
   if (RESEND_API_KEY) {
     try {
       const resend = new Resend(RESEND_API_KEY);
+      const { subject, text } = EMAILS[locale] || EMAILS.en;
       await resend.emails.send({
         from: RESEND_FROM,
         to: [email],
-        subject: "You're on the Neare early access list",
-        text:
-          "Thanks for joining the Neare waitlist.\n\n" +
-          "We're building a new way for families to notice early signs of cognitive change at home — no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
-          "We'll be in touch when early access opens.\n\n" +
-          '— The Neare team',
+        subject,
+        text,
       });
     } catch (e) {
       console.error('Resend error', e);
