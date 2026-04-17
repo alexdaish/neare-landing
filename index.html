@@ -923,6 +923,12 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     html { scroll-behavior: auto; }
   }
 </style>
+
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
@@ -1361,6 +1367,35 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     utm_campaign: params.get('utm_campaign') || ''
   };
 
+  // ---------- Vercel Analytics custom events ----------
+  function track(name, data) {
+    try {
+      window.va && window.va('event', {
+        name: name,
+        data: Object.assign({ variant: variant, locale: 'en' }, data || {})
+      });
+    } catch (e) {}
+  }
+
+  // Scroll depth (50% / 90%)
+  var scrollFired = {};
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight;
+    if (pct > 0.5 && !scrollFired['50']) { scrollFired['50'] = 1; track('scroll_depth', { depth: 50 }); }
+    if (pct > 0.9 && !scrollFired['90']) { scrollFired['90'] = 1; track('scroll_depth', { depth: 90 }); }
+  }, { passive: true });
+
+  // CTA clicks
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      track('cta_click', { target: a.getAttribute('href').slice(1) });
+    });
+  });
+  document.querySelectorAll('[data-pricing-cta]').forEach(function (b) {
+    b.addEventListener('click', function () { track('pricing_cta_click'); });
+  });
+
   // ---------- Fade-in on scroll ----------
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -1416,6 +1451,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         .then(function () {
           form.classList.add('success');
           msg.textContent = "You're on the list — we'll be in touch.";
+          track('lead_submit');
         })
         .catch(function (err) {
           btn.disabled = false;
