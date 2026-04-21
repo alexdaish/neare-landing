@@ -1468,12 +1468,12 @@ if (window.__neare_consent === 'accepted') __neare_loadPixel();
   var variant = (params.get('v') || 'A').toUpperCase();
   if (variant !== 'A' && variant !== 'B') variant = 'A';
 
-  if (variant === ‘B’) {
-    var h1 = document.querySelector(‘[data-hero-h1]’);
-    var lede = document.querySelector(‘[data-hero-lede]’);
-    if (h1) h1.textContent = ‘Veränderungen erkennen, die zählen — Wochen vor einer Krise.’;
-    if (lede) lede.textContent = ‘Neare ist ein leiser Heimsensor und eine Pflege-App, die die täglichen Gewohnheiten deines Elternteils beobachtet und dir sagt, wenn sich etwas verändert. Damit kleine Signale nie zu Notfällen werden.’;
-    document.title = ‘Neare — Veränderungen erkennen, die zählen’;
+  if (variant === 'B') {
+    var h1 = document.querySelector('[data-hero-h1]');
+    var lede = document.querySelector('[data-hero-lede]');
+    if (h1) h1.textContent = 'Veränderungen erkennen, die zählen — Wochen vor einer Krise.';
+    if (lede) lede.textContent = 'Neare ist ein leiser Heimsensor und eine Pflege-App, die die täglichen Gewohnheiten deines Elternteils beobachtet und dir sagt, wenn sich etwas verändert. Damit kleine Signale nie zu Notfällen werden.';
+    document.title = 'Neare — Veränderungen erkennen, die zählen';
   }
 
   // ---------- UTM capture ----------
