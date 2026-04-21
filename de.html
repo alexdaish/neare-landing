@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F5F0E8">
 <meta name="facebook-domain-verification" content="d7t9w1ay7abkw90fiyrwvigwgaix82" />
-<title>Neare — See what a phone call can’t</title>
-<meta name="description" content="Neare quietly monitors your parent’s daily patterns at home — no cameras, no intrusion — and tells you when something changes. So you can act early, not react late.">
+<title>Neare — Erkennen, was ein Anruf nicht verraten kann</title>
+<meta name="description" content="Neare überwacht leise die täglichen Gewohnheiten deiner Eltern zu Hause — keine Kameras, kein Eindringen — und sagt dir, wenn sich etwas verändert. Damit du früh handeln kannst, statt spät zu reagieren.">
 <link rel="alternate" hreflang="en-GB" href="https://getneare.com/">
 <link rel="alternate" hreflang="de" href="https://getneare.com/de">
 <link rel="alternate" hreflang="x-default" href="https://getneare.com/">
@@ -18,23 +18,28 @@
 <link rel="preload" as="image" href="assets/hero-bg-800.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="assets/hero-bg.webp" media="(min-width: 900px)">
 
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel — loaded only after cookie consent (TTDSG + GDPR) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1892352458820371');
-fbq('track', 'PageView');
+window.__neare_consent = (function () {
+  var c = document.cookie.match('(?:^|; )neare_consent=([^;]*)');
+  return c ? c[1] : null;
+})();
+function __neare_loadPixel() {
+  if (window.__neare_pixel_loaded) return;
+  window.__neare_pixel_loaded = true;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1892352458820371');
+  fbq('track', 'PageView');
+}
+if (window.__neare_consent === 'accepted') __neare_loadPixel();
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 
 <style>
   :root {
@@ -920,6 +925,112 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
     html { scroll-behavior: auto; }
   }
+
+  /* ---------- CONSENT CHECKBOX ---------- */
+  .consent-row {
+    flex-basis: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--navy-soft);
+    line-height: 1.5;
+  }
+  .consent-row input[type=checkbox] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    accent-color: var(--sage-deep);
+  }
+  .consent-row a { color: var(--sage-deep); }
+  .form-microcopy {
+    flex-basis: 100%;
+    font-size: 12px;
+    color: var(--mute);
+    line-height: 1.55;
+    margin: 4px 0 0;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    max-width: 520px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy-soft);
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .trust-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--sage-deep);
+    flex-shrink: 0;
+  }
+
+  /* ---------- COOKIE CONSENT BANNER ---------- */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--stone);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 24px rgba(44, 62, 80, .12);
+    padding: 20px 24px;
+  }
+  .cookie-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cookie-text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--navy-soft);
+    line-height: 1.5;
+    min-width: 280px;
+  }
+  .cookie-text a { color: var(--sage-deep); }
+  .cookie-buttons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cookie-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    transition: background .15s;
+  }
+  .cookie-btn-accept {
+    background: var(--sage-deep);
+    color: #fff;
+    border-color: var(--sage-deep);
+  }
+  .cookie-btn-accept:hover { background: var(--sage); }
+  .cookie-btn-reject {
+    background: var(--stone);
+    color: var(--navy);
+  }
+  .cookie-btn-reject:hover { background: var(--stone-warm); }
 </style>
 </head>
 
@@ -931,23 +1042,32 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <section class="hero">
   <header class="site-header">
     <div class="wrap site-header-inner">
-      <a href="/" class="wordmark">neare</a>
-      <span class="header-tag">Early access</span>
+      <a href="/de" class="wordmark">neare</a>
+      <span class="header-tag">Frühzugang</span>
     </div>
   </header>
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
-      <h1 data-hero-h1>See what a phone call can’t.</h1>
-      <p class="lede" data-hero-lede>Neare quietly monitors your parent’s daily patterns at home — no cameras, no intrusion — and tells you when something changes. So you can act early, not react late.</p>
+      <h1 data-hero-h1>Erkennen, was ein Anruf nicht verraten kann.</h1>
+      <p class="lede" data-hero-lede>Neare überwacht leise die täglichen Gewohnheiten deiner Eltern zu Hause — keine Kameras, kein Eindringen — und sagt dir, wenn sich etwas verändert. Damit du früh handeln kannst, statt spät zu reagieren.</p>
 
       <form class="capture" data-form>
-        <label class="sr" for="email-1">Email address</label>
-        <input id="email-1" type="email" name="email" required placeholder="your@email.com" autocomplete="email">
-        <button type="submit">Join the early access list</button>
+        <label class="sr" for="email-1">E-Mail-Adresse</label>
+        <input id="email-1" type="email" name="email" required placeholder="deine@email.de" autocomplete="email">
+        <button type="submit">Auf die Warteliste</button>
+        <label class="consent-row">
+          <input type="checkbox" name="consent" required>
+          <span>Ich bin einverstanden, dass meine E-Mail-Adresse zum Zweck der Vormerkung gespeichert und verarbeitet wird. Weitere Informationen in der <a href="/datenschutz">Datenschutzerklärung</a>.</span>
+        </label>
         <p class="form-msg" data-msg></p>
+        <p class="form-microcopy">Wir melden uns einmalig, sobald Neare in Deutschland verfügbar ist. Kein Newsletter, kein Spam, jederzeit abmeldbar. Ihre Daten werden verschlüsselt gespeichert und nicht an Dritte weitergegeben.</p>
       </form>
-      <p class="reassure">We’ll let you know when Neare is ready. No spam, ever.</p>
-      <a class="ghost" href="#how">See how it works ↓</a>
+      <div class="trust-strip">
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> DSGVO-konform</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> Server in der EU</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l22 22M21 21H3a2 2 0 01-2-2V8a2 2 0 012-2h3m3-3h9a2 2 0 012 2v9m0 4v2"/></svg> Keine Kamera</span>
+      </div>
+      <a class="ghost" href="#how">So funktioniert es ↓</a>
     </div>
 
     <div class="hero-art reveal" aria-hidden="true">
@@ -959,11 +1079,11 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
               <span class="phone-brand">neare</span>
               <svg class="phone-icon-btn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             </div>
-            <p class="phone-title">Today</p>
-            <span class="phone-pill">✓ Mum's day looks normal</span>
+            <p class="phone-title">Heute</p>
+            <span class="phone-pill">✓ Mamas Tag sieht normal aus</span>
 
             <div class="phone-card">
-              <p class="phone-label">Daily rhythm <span class="time">Updated 08:14</span></p>
+              <p class="phone-label">Tagesrhythmus <span class="time">Aktualisiert 08:14</span></p>
               <div class="rhythm-bars">
                 <span style="height:60%"></span>
                 <span style="height:85%"></span>
@@ -974,32 +1094,32 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
                 <span style="height:75%"></span>
               </div>
               <div class="rhythm-row">
-                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Morning routine</span>
-                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Active around house</span>
-                <span class="item mute">○ Afternoon rest</span>
-                <span class="item mute">○ Evening</span>
+                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Morgenroutine</span>
+                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Aktiv im Haus</span>
+                <span class="item mute">○ Nachmittagsruhe</span>
+                <span class="item mute">○ Abend</span>
               </div>
             </div>
 
             <div class="phone-alert">
-              <p class="phone-alert-title">Mum's been getting up at night more often this week.</p>
-              <p class="phone-alert-sub">3 nights in the last 7 — up from her usual 1.</p>
-              <span class="phone-btn">What should I do?</span>
-              <p class="phone-dismiss">Dismiss</p>
+              <p class="phone-alert-title">Mama steht diese Woche nachts häufiger auf.</p>
+              <p class="phone-alert-sub">3 von 7 Nächten — ihr Durchschnitt liegt bei 1.</p>
+              <span class="phone-btn">Was soll ich tun?</span>
+              <p class="phone-dismiss">Verwerfen</p>
             </div>
 
             <div class="phone-tabs">
               <span class="phone-tab active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                Today
+                Heute
               </span>
               <span class="phone-tab">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-8"/></svg>
-                Summary
+                Verlauf
               </span>
               <span class="phone-tab">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                Family
+                Familie
               </span>
             </div>
           </div>
@@ -1012,16 +1132,16 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== PROBLEM ========== -->
 <section class="problem">
   <div class="wrap narrow reveal">
-    <p class="big">You call and they sound fine. But between visits, you have no idea what’s really happening.</p>
-    <p>There’s nothing between GP appointments that happen every three to six months. No early warning. No objective picture. Just guilt, worry, and guesswork.</p>
-    <p class="bridge">Neare fills that gap — a continuous, gentle signal so you notice changes weeks before they become a crisis.</p>
+    <p class="big">Du rufst an und es klingt alles gut. Aber zwischen den Besuchen weißt du nicht, was wirklich passiert.</p>
+    <p>Zwischen den Hausarztterminen, die alle drei bis sechs Monate stattfinden, gibt es nichts. Keine Frühwarnung. Kein objektives Bild. Nur Schuldgefühle, Sorgen und Rätselraten.</p>
+    <p class="bridge">Neare füllt diese Lücke — ein kontinuierliches, sanftes Signal, damit du Veränderungen Wochen vor einer Krise bemerkst.</p>
   </div>
 </section>
 
 <!-- ========== HOW IT WORKS ========== -->
 <section id="how" class="how">
   <div class="wrap">
-    <h2 class="reveal">How it works</h2>
+    <h2 class="reveal">So funktioniert es</h2>
     <div class="grid-3">
 
       <article class="card reveal">
@@ -1031,8 +1151,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M32 42h.01"/>
           <path d="M44 34c3 0 5-2 5-5M20 34c-3 0-5-2-5-5"/>
         </svg>
-        <h3>Place the sensor</h3>
-        <p>A small plug-in radar device — no cameras, no wearables, nothing for your parent to do. It works quietly in the background. Most people forget it’s there.</p>
+        <h3>Sensor aufstellen</h3>
+        <p>Ein kleines Radar-Gerät zum Einstecken — keine Kameras, keine Wearables, nichts, was dein Elternteil tun muss. Es arbeitet leise im Hintergrund. Die meisten vergessen, dass es da ist.</p>
       </article>
 
       <article class="card reveal">
@@ -1040,8 +1160,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M8 38 Q16 20 24 38 T40 38 T56 38"/>
           <circle cx="56" cy="38" r="3"/>
         </svg>
-        <h3>Neare learns their rhythm</h3>
-        <p>Over the first two weeks it builds a picture of what normal looks like — then watches for meaningful changes, not noise. No false alarms. No alert fatigue.</p>
+        <h3>Neare lernt den Rhythmus</h3>
+        <p>In den ersten zwei Wochen erstellt es ein Bild davon, wie ein normaler Tag aussieht — und achtet dann auf bedeutsame Veränderungen, nicht auf Rauschen. Kein Fehlalarm. Keine Alarm-Müdigkeit.</p>
       </article>
 
       <article class="card reveal">
@@ -1050,8 +1170,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M26 24h12M26 32h12M26 40h8"/>
           <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
         </svg>
-        <h3>You get guidance, not data</h3>
-        <p>When something shifts, Neare tells you what changed, what it might mean, and what to do. Share a GP-ready summary in one tap.</p>
+        <h3>Orientierung statt Datenflut</h3>
+        <p>Wenn sich etwas verändert, sagt dir Neare, was sich geändert hat, was es bedeuten könnte und was du tun kannst. Teile eine arztfertige Zusammenfassung mit einem Tipp.</p>
       </article>
 
     </div>
@@ -1063,11 +1183,11 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   <div class="wrap">
     <div class="practice-grid">
       <div class="practice-copy reveal">
-        <p class="eyebrow">In practice</p>
-        <h2>Not just alerts.<br>Guidance you can act on.</h2>
-        <p>When Neare spots a change, it doesn't just flag it. It explains what's different, why it might matter, and gives you a clear next step — so you never feel helpless.</p>
-        <p>No medical jargon. No data overload. Just a calm, clear voice saying: here's what's happening, and here's what you can do.</p>
-        <p class="pull">"Dad's been getting up more at night. Here's what that might mean — and a summary you can share with his GP."</p>
+        <p class="eyebrow">In der Praxis</p>
+        <h2>Nicht nur Alarme.<br>Orientierung, die du nutzen kannst.</h2>
+        <p>Wenn Neare eine Veränderung erkennt, meldet es nicht nur. Es erklärt, was anders ist, warum es wichtig sein könnte, und gibt dir einen klaren nächsten Schritt — damit du dich nie hilflos fühlst.</p>
+        <p>Kein Mediziner-Deutsch. Keine Datenflut. Einfach eine ruhige, klare Stimme: Das passiert gerade, und das kannst du tun.</p>
+        <p class="pull">„Papa steht nachts häufiger auf. Das könnte es bedeuten — und hier ist eine Zusammenfassung für seinen Hausarzt."</p>
       </div>
       <div class="phone-stage reveal">
         <div class="phone">
@@ -1075,43 +1195,43 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
             <div class="phone-notch"></div>
             <div class="phone-back">
               <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 2L4 8l6 6"/></svg>
-              Back to Today
+              Zurück zu Heute
             </div>
             <div class="alert-hero">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-              <p>Dad's been getting up at night more often this week.</p>
+              <p>Papa steht diese Woche nachts häufiger auf.</p>
             </div>
 
             <div class="context-card">
-              <p class="phone-label">What we noticed</p>
-              <p>Night-time movement increased to 3 of the last 7 nights — up from his usual average of 1. The pattern started 5 days ago.</p>
+              <p class="phone-label">Was wir bemerkt haben</p>
+              <p>Nächtliche Bewegung an 3 der letzten 7 Nächte gestiegen — sein Durchschnitt liegt bei 1. Das Muster begann vor 5 Tagen.</p>
             </div>
 
             <div class="guided">
               <div class="guided-step">
                 <span class="num">1</span>
                 <div>
-                  <p class="step-title">Have a gentle conversation</p>
-                  <div class="speech">"Dad, have you been sleeping okay? I noticed you've been a bit restless."</div>
+                  <p class="step-title">Führe ein behutsames Gespräch</p>
+                  <div class="speech">„Papa, schläfst du gut? Mir ist aufgefallen, dass du etwas unruhig warst."</div>
                 </div>
               </div>
               <div class="guided-step">
                 <span class="num">2</span>
                 <div>
-                  <p class="step-title">Check for common causes</p>
-                  <div class="speech">Pain, new medication, needing the loo more, anxiety — all worth ruling out.</div>
+                  <p class="step-title">Häufige Ursachen prüfen</p>
+                  <div class="speech">Schmerzen, neue Medikamente, häufigerer Toilettengang, Unruhe — alles, was man ausschließen sollte.</div>
                 </div>
               </div>
               <div class="guided-step">
                 <span class="num">3</span>
                 <div>
-                  <p class="step-title">Share with his GP</p>
-                  <span class="phone-btn" style="display:inline-block;width:auto;margin-top:6px;">Share GP-ready summary</span>
+                  <p class="step-title">Mit seinem Hausarzt teilen</p>
+                  <span class="phone-btn" style="display:inline-block;width:auto;margin-top:6px;">Arztbericht teilen</span>
                 </div>
               </div>
             </div>
 
-            <p class="phone-closer">Neare gives you the words — not just the data.</p>
+            <p class="phone-closer">Neare gibt dir die Worte — nicht nur die Daten.</p>
 
             <div class="phone-tabs">
               <span class="phone-tab">
@@ -1137,7 +1257,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== BENEFITS ========== -->
 <section class="benefits">
   <div class="wrap">
-    <h2 class="reveal">Why caregivers want it</h2>
+    <h2 class="reveal">Warum Angehörige es wollen</h2>
     <div class="grid-3">
 
       <article class="card reveal">
@@ -1145,8 +1265,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <circle cx="32" cy="32" r="22"/>
           <path d="M32 20v12l8 5"/>
         </svg>
-        <h3>Stop finding out too late.</h3>
-        <p>Neare catches sleep changes, routine shifts and movement patterns weeks before they become visible to you.</p>
+        <h3>Nicht mehr zu spät erfahren.</h3>
+        <p>Neare erkennt Schlafveränderungen, Routine-Abweichungen und Bewegungsmuster Wochen bevor sie dir auffallen würden.</p>
       </article>
 
       <article class="card reveal">
@@ -1154,16 +1274,16 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M10 34 L32 16 L54 34 V52 H10 Z"/>
           <path d="M28 52 V38 H36 V52"/>
         </svg>
-        <h3>The reassurance of presence — without being there.</h3>
-        <p>A quiet background layer of awareness, even when you live an hour away.</p>
+        <h3>Die Sicherheit von Nähe — ohne vor Ort zu sein.</h3>
+        <p>Eine leise Ebene des Bewusstseins im Hintergrund, auch wenn du eine Stunde entfernt wohnst.</p>
       </article>
 
       <article class="card reveal">
         <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 54 C 18 42 10 32 18 22 C 24 15 32 20 32 28 C 32 20 40 15 46 22 C 54 32 46 42 32 54 Z"/>
         </svg>
-        <h3>The best care keeps them where they want to be.</h3>
-        <p>Earlier intervention means fewer crises, fewer hospital trips and more time at home.</p>
+        <h3>Die beste Pflege lässt sie dort, wo sie sein wollen.</h3>
+        <p>Frühere Intervention bedeutet weniger Krisen, weniger Krankenhausaufenthalte und mehr Zeit zu Hause.</p>
       </article>
 
     </div>
@@ -1173,26 +1293,26 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== OBJECTIONS ========== -->
 <section class="objections">
   <div class="wrap">
-    <h2 class="reveal">What caregivers asked us</h2>
+    <h2 class="reveal">Was Angehörige uns gefragt haben</h2>
 
     <details class="reveal">
-      <summary>Will it actually work?</summary>
-      <p>Neare uses clinically-informed radar sensing — the same technology used in hospital fall detection — to track gait, sleep and daily routine. No false alarms from the cat. We’re building with families, not just for them.</p>
+      <summary>Funktioniert das wirklich?</summary>
+      <p>Neare nutzt klinisch fundierte Radarsensorik — die gleiche Technologie, die in der Sturzerkennung in Krankenhäusern eingesetzt wird — um Gang, Schlaf und Tagesroutine zu erfassen. Keine Fehlalarme durch die Katze. Wir entwickeln mit Familien, nicht nur für sie.</p>
     </details>
 
     <details class="reveal">
-      <summary>Will they feel watched?</summary>
-      <p>No cameras. No microphones. No wearables. The sensor reads movement patterns, not images. It’s about the size of a phone charger and stays out of sight.</p>
+      <summary>Fühlen sie sich überwacht?</summary>
+      <p>Keine Kameras. Keine Mikrofone. Keine Wearables. Der Sensor liest Bewegungsmuster, keine Bilder. Er ist etwa so groß wie ein Handy-Ladegerät und bleibt unsichtbar.</p>
     </details>
 
     <details class="reveal">
-      <summary>What makes Neare different?</summary>
-      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It’s a single plug-in device that sees movement, not images — the same radar technology used in hospital fall detection — so your parent keeps their privacy and their independence. And instead of dumping raw data on you, Neare tells you only when something has meaningfully changed, and what to do about it.</p>
+      <summary>Was unterscheidet Neare?</summary>
+      <p>Die meisten Produkte zur Heimüberwachung sind entweder Kameras, die auf dein Elternteil gerichtet sind, oder Wearables, die man nicht vergessen darf anzuziehen. Neare ist keines von beidem. Es ist ein einziges Steckgerät, das Bewegung erkennt, keine Bilder — die gleiche Radartechnologie wie in der Sturzerkennung im Krankenhaus — so behält dein Elternteil seine Privatsphäre und Unabhängigkeit. Und statt dich mit Rohdaten zu überschütten, sagt dir Neare nur, wenn sich etwas wirklich verändert hat, und was du tun kannst.</p>
     </details>
 
     <details class="reveal">
-      <summary>Is it worth £29 a month?</summary>
-      <p>Most families already spend £50–150 a month on care support. Neare costs less than a weekly cleaner — and it’s watching every hour, not just one afternoon.</p>
+      <summary>Lohnen sich 34 € im Monat?</summary>
+      <p>Die meisten Familien geben bereits 60–180 € im Monat für Pflegeunterstützung aus. Neare kostet weniger als eine wöchentliche Haushaltshilfe — und es ist rund um die Uhr da, nicht nur einen Nachmittag.</p>
     </details>
   </div>
 </section>
@@ -1200,7 +1320,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== WHAT'S INCLUDED ========== -->
 <section class="included">
   <div class="wrap">
-    <h2 class="reveal">What's included</h2>
+    <h2 class="reveal">Was enthalten ist</h2>
     <div class="included-grid">
 
       <article class="included-card reveal">
@@ -1230,10 +1350,10 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <!-- soft glow behind device -->
           <ellipse cx="140" cy="100" rx="28" ry="20" fill="#8FA98F" opacity=".06"/>
         </svg>
-        <h3>The Neare sensor</h3>
-        <p>A small, matte-white device about the size of a candle. No screen, no LEDs, no buttons. Plug it in, place it on a shelf or side table, and forget it's there.</p>
-        <p>It uses radar — not cameras or microphones — to read movement patterns throughout the home. Your parent's privacy stays completely intact.</p>
-        <p class="detail">Included with your subscription · No upfront cost · Plug-in, no installation</p>
+        <h3>Der Neare-Sensor</h3>
+        <p>Ein kleines, matt-weißes Gerät, etwa so groß wie eine Kerze. Kein Bildschirm, keine LEDs, keine Tasten. Einstecken, auf ein Regal oder einen Beistelltisch stellen und vergessen.</p>
+        <p>Es nutzt Radar — keine Kameras oder Mikrofone — um Bewegungsmuster in der Wohnung zu erfassen. Die Privatsphäre deines Elternteils bleibt vollständig gewahrt.</p>
+        <p class="detail">Im Abo enthalten · Keine Vorabkosten · Einstecken, keine Installation</p>
       </article>
 
       <article class="included-card reveal">
@@ -1242,10 +1362,10 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M26 24h12M26 32h12M26 40h8"/>
           <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
         </svg>
-        <h3>The Neare app</h3>
-        <p>A calm, clear window into your parent's daily rhythm. See at a glance whether their day looks normal — and get guidance when something shifts.</p>
-        <p>Share updates with family members. Export GP-ready summaries in one tap. No data overload, just the information that matters.</p>
-        <p class="detail">iOS + Android · Invite up to 5 family members · Weekly email summaries</p>
+        <h3>Die Neare-App</h3>
+        <p>Ein ruhiges, klares Fenster in den Tagesrhythmus deines Elternteils. Sieh auf einen Blick, ob der Tag normal verläuft — und erhalte Orientierung, wenn sich etwas verändert.</p>
+        <p>Teile Updates mit Familienmitgliedern. Exportiere arztfertige Zusammenfassungen mit einem Tipp. Keine Datenflut, nur die Informationen, die zählen.</p>
+        <p class="detail">iOS + Android · Bis zu 5 Familienmitglieder einladen · Wöchentliche E-Mail-Zusammenfassungen</p>
       </article>
 
     </div>
@@ -1255,14 +1375,14 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== PRICING ========== -->
 <section class="pricing">
   <div class="wrap">
-    <h2 class="reveal">Simple, honest pricing</h2>
+    <h2 class="reveal">Einfache, ehrliche Preise</h2>
     <div class="price-card reveal">
-      <p class="eyebrow">Early access</p>
-      <div class="price"><span class="amt">£29</span><span class="per">/month</span></div>
-      <p class="incl">Includes sensor + app. No hidden fees.</p>
-      <p class="incl">No contract. Cancel anytime. <strong>First month free.</strong></p>
-      <p class="anchor">Less than the cost of a single private home visit.</p>
-      <a class="btn" href="#join" data-pricing-cta>Get early access at launch price</a>
+      <p class="eyebrow">Frühzugang</p>
+      <div class="price"><span class="amt">34 €</span><span class="per">/Monat</span></div>
+      <p class="incl">Sensor + App inklusive. Keine versteckten Kosten.</p>
+      <p class="incl">Kein Vertrag. Jederzeit kündbar. <strong>Erster Monat kostenlos.</strong></p>
+      <p class="anchor">Weniger als ein einziger privater Pflegebesuch.</p>
+      <a class="btn" href="#join" data-pricing-cta>Jetzt Frühzugang zum Startpreis sichern</a>
     </div>
   </div>
 </section>
@@ -1270,46 +1390,46 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== SOCIAL PROOF ========== -->
 <section class="proof">
   <div class="wrap">
-    <h2 class="reveal">Families already trying Neare</h2>
+    <h2 class="reveal">Familien, die Neare bereits testen</h2>
     <div class="quotes">
 
       <figure class="testimonial reveal">
-        <blockquote>I used to call Dad every evening just to hear his voice and feel okay about it. Now I actually know he slept, he’s eating, he’s getting out of bed at the right time. It’s taken a weight off I didn’t realise I was carrying.</blockquote>
+        <blockquote>Früher habe ich Papa jeden Abend angerufen, nur um seine Stimme zu hören und mich zu beruhigen. Jetzt weiß ich tatsächlich, ob er geschlafen hat, ob er isst, ob er zur richtigen Zeit aufsteht. Es hat mir eine Last genommen, von der ich nicht wusste, dass ich sie trug.</blockquote>
         <figcaption>
-          <div class="avatar" aria-hidden="true">SM</div>
+          <div class="avatar" aria-hidden="true">AM</div>
           <div>
-            <p class="name">Sarah M.</p>
-            <p class="role">Daughter · Manchester</p>
+            <p class="name">Anna M.</p>
+            <p class="role">Tochter · München</p>
           </div>
         </figcaption>
       </figure>
 
       <figure class="testimonial reveal">
-        <blockquote>Mum was adamant she didn’t want a camera in the house and I agreed with her. Neare is the first thing we’ve both been comfortable with — she forgets it’s there, and I finally stopped lying awake at 2am.</blockquote>
+        <blockquote>Mama wollte auf keinen Fall eine Kamera im Haus und ich gab ihr Recht. Neare ist das Erste, womit wir beide uns wohlfühlen — sie vergisst, dass es da ist, und ich liege endlich nicht mehr um 2 Uhr nachts wach.</blockquote>
         <figcaption>
-          <div class="avatar" aria-hidden="true">JT</div>
+          <div class="avatar" aria-hidden="true">TK</div>
           <div>
-            <p class="name">James T.</p>
-            <p class="role">Son · Bristol</p>
+            <p class="name">Thomas K.</p>
+            <p class="role">Sohn · Hamburg</p>
           </div>
         </figcaption>
       </figure>
 
       <figure class="testimonial reveal">
-        <blockquote>We caught a change in her sleep pattern three weeks before her GP appointment. Turned out to be the start of a UTI. I can’t overstate what catching that early meant for us.</blockquote>
+        <blockquote>Wir haben eine Veränderung in ihrem Schlafmuster drei Wochen vor dem Hausarzttermin bemerkt. Es stellte sich heraus, dass es der Beginn eines Harnwegsinfekts war. Ich kann nicht genug betonen, was diese Früherkennung für uns bedeutet hat.</blockquote>
         <figcaption>
-          <div class="avatar" aria-hidden="true">PK</div>
+          <div class="avatar" aria-hidden="true">LW</div>
           <div>
-            <p class="name">Priya K.</p>
-            <p class="role">Daughter · Edinburgh</p>
+            <p class="name">Lena W.</p>
+            <p class="role">Tochter · Berlin</p>
           </div>
         </figcaption>
       </figure>
 
     </div>
     <p class="meta reveal">
-      Join <strong>200+ families</strong> on the early access list<br>
-      Developed with clinicians and sensor engineers
+      Schließe dich <strong>über 200 Familien</strong> auf der Frühzugangsliste an<br>
+      Entwickelt mit Klinikern und Sensor-Ingenieuren
     </p>
   </div>
 </section>
@@ -1317,14 +1437,18 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== FINAL CTA ========== -->
 <section id="join" class="final">
   <div class="wrap narrow reveal">
-    <h2>You shouldn’t have to wonder if they’re okay.</h2>
+    <h2>Du solltest nicht raten müssen, ob es ihnen gut geht.</h2>
     <form class="capture" data-form>
-      <label class="sr" for="email-2">Email address</label>
-      <input id="email-2" type="email" name="email" required placeholder="your@email.com" autocomplete="email">
-      <button type="submit">Join the early access list</button>
+      <label class="sr" for="email-2">E-Mail-Adresse</label>
+      <input id="email-2" type="email" name="email" required placeholder="deine@email.de" autocomplete="email">
+      <button type="submit">Auf die Warteliste</button>
+      <label class="consent-row">
+        <input type="checkbox" name="consent" required>
+        <span>Ich bin einverstanden, dass meine E-Mail-Adresse zum Zweck der Vormerkung gespeichert und verarbeitet wird. Weitere Informationen in der <a href="/datenschutz">Datenschutzerklärung</a>.</span>
+      </label>
       <p class="form-msg" data-msg></p>
+      <p class="form-microcopy">Wir melden uns einmalig, sobald Neare in Deutschland verfügbar ist. Kein Newsletter, kein Spam, jederzeit abmeldbar. Ihre Daten werden verschlüsselt gespeichert und nicht an Dritte weitergegeben.</p>
     </form>
-    <p class="reassure">We’ll let you know when Neare is ready. No spam, ever.</p>
   </div>
 </section>
 
@@ -1332,8 +1456,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
 <footer>
   <div class="wrap foot">
-    <p>© 2026 Neare</p>
-    <p><a href="/privacy">Privacy</a> · <a href="mailto:hello@getneare.com">hello@getneare.com</a></p>
+    <p>Neare · Founders Factory Ltd · Kemperplatz 1, 10785 Berlin · Geschäftsführung: Max Glints</p>
+    <p><a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · <a href="mailto:hello@getneare.com">Kontakt</a></p>
   </div>
 </footer>
 
@@ -1344,12 +1468,12 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   var variant = (params.get('v') || 'A').toUpperCase();
   if (variant !== 'A' && variant !== 'B') variant = 'A';
 
-  if (variant === 'B') {
-    var h1 = document.querySelector('[data-hero-h1]');
-    var lede = document.querySelector('[data-hero-lede]');
-    if (h1) h1.textContent = 'Notice the changes that matter — weeks before a crisis.';
-    if (lede) lede.textContent = 'Neare is a quiet home sensor and caregiver app that watches your parent’s daily patterns and tells you when something shifts. So small signals never turn into emergencies.';
-    document.title = 'Neare — Notice the changes that matter';
+  if (variant === ‘B’) {
+    var h1 = document.querySelector(‘[data-hero-h1]’);
+    var lede = document.querySelector(‘[data-hero-lede]’);
+    if (h1) h1.textContent = ‘Veränderungen erkennen, die zählen — Wochen vor einer Krise.’;
+    if (lede) lede.textContent = ‘Neare ist ein leiser Heimsensor und eine Pflege-App, die die täglichen Gewohnheiten deines Elternteils beobachtet und dir sagt, wenn sich etwas verändert. Damit kleine Signale nie zu Notfällen werden.’;
+    document.title = ‘Neare — Veränderungen erkennen, die zählen’;
   }
 
   // ---------- UTM capture ----------
@@ -1384,11 +1508,11 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       e.preventDefault();
       var email = (input.value || '').trim();
       if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        msg.textContent = 'Please enter a valid email address.';
+        msg.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
         return;
       }
       btn.disabled = true;
-      msg.textContent = 'Adding you to the list…';
+      msg.textContent = 'Du wirst zur Liste hinzugefügt…';
 
       var eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
       if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
@@ -1399,6 +1523,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         body: JSON.stringify({
           email: email,
           variant: variant,
+          locale: 'de',
           utm_source: utm.utm_source,
           utm_medium: utm.utm_medium,
           utm_campaign: utm.utm_campaign,
@@ -1413,18 +1538,44 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         })
         .then(function () {
           form.classList.add('success');
-          msg.textContent = "You're on the list — we'll be in touch.";
+          msg.textContent = "Danke! Bitte bestätige deine E-Mail-Adresse über den Link, den wir dir gerade geschickt haben.";
         })
         .catch(function (err) {
           btn.disabled = false;
           if (err.message === 'rate') {
-            msg.textContent = "You're going a bit fast — give it a moment and try again.";
+            msg.textContent = "Das ging etwas schnell — warte einen Moment und versuche es erneut.";
           } else {
-            msg.textContent = 'Something went wrong — please try again.';
+            msg.textContent = 'Etwas ist schiefgelaufen — bitte versuche es erneut.';
           }
         });
     });
   });
+})();
+</script>
+
+<!-- Cookie consent banner -->
+<div class="cookie-banner" id="cookie-banner" style="display:none">
+  <div class="cookie-inner">
+    <p class="cookie-text">Wir verwenden Cookies und ähnliche Technologien, um die Nutzung unserer Website zu analysieren. Weitere Informationen in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+    <div class="cookie-buttons">
+      <button class="cookie-btn cookie-btn-reject" id="cookie-reject">Alle ablehnen</button>
+      <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Alle akzeptieren</button>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  if (window.__neare_consent) return;
+  var banner = document.getElementById('cookie-banner');
+  banner.style.display = '';
+  function setConsent(value) {
+    var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+    document.cookie = 'neare_consent=' + value + ';path=/;expires=' + d.toUTCString() + ';SameSite=Lax';
+    banner.style.display = 'none';
+    if (value === 'accepted') __neare_loadPixel();
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function () { setConsent('accepted'); });
+  document.getElementById('cookie-reject').addEventListener('click', function () { setConsent('rejected'); });
 })();
 </script>
 

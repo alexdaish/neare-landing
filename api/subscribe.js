@@ -37,6 +37,7 @@ export default async function handler(req, res) {
   }
 
   const variant = clean(body.variant, 8) === 'B' ? 'B' : 'A';
+  const locale = clean(body.locale, 8) || 'en';
 
   const {
     AIRTABLE_API_KEY,
@@ -53,6 +54,12 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'server_misconfigured', detail: 'missing_airtable_env' });
     return;
   }
+
+  const confirmToken = locale === 'de'
+    ? Array.from(globalThis.crypto.getRandomValues(new Uint8Array(24)))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('')
+    : '';
 
   // 1. Write to Airtable (native fetch, Node 18+)
   let airtableOk = false;
@@ -71,6 +78,9 @@ export default async function handler(req, res) {
               fields: {
                 Email: email,
                 Variant: variant,
+                Locale: locale,
+                Status: locale === 'de' ? 'pending' : 'confirmed',
+                'Confirm Token': locale === 'de' ? confirmToken : '',
                 'UTM Source': clean(body.utm_source),
                 'UTM Medium': clean(body.utm_medium),
                 'UTM Campaign': clean(body.utm_campaign),
@@ -100,19 +110,37 @@ export default async function handler(req, res) {
   if (RESEND_API_KEY) {
     try {
       const resend = new Resend(RESEND_API_KEY);
+      const siteUrl = process.env.SITE_URL || 'https://getneare.com';
+
+      const emailContent =
+        locale === 'de'
+          ? {
+              subject: 'Bitte bestätige deine E-Mail-Adresse — Neare',
+              text:
+                'Danke für dein Interesse an Neare!\n\n' +
+                'Bitte bestätige deine E-Mail-Adresse, indem du auf den folgenden Link klickst:\n\n' +
+                `${siteUrl}/api/confirm?token=${confirmToken}\n\n` +
+                'Wir entwickeln eine neue Art, frühe Anzeichen kognitiver Veränderungen zu Hause zu erkennen — ohne Kameras, ohne Wearables, nur ein leiser Sensor und eine App, die dir sagt, wenn etwas Wichtiges passiert.\n\n' +
+                'Wir melden uns, sobald der Frühzugang verfügbar ist.\n\n' +
+                '— Das Neare-Team',
+            }
+          : {
+              subject: "You're on the Neare early access list",
+              text:
+                "Thanks for joining the Neare waitlist.\n\n" +
+                "We're building a new way for families to notice early signs of cognitive change at home — no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
+                "We'll be in touch when early access opens.\n\n" +
+                '— The Neare team',
+            };
+
       await resend.emails.send({
         from: RESEND_FROM,
         to: [email],
-        subject: "You're on the Neare early access list",
-        text:
-          "Thanks for joining the Neare waitlist.\n\n" +
-          "We're building a new way for families to notice early signs of cognitive change at home — no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
-          "We'll be in touch when early access opens.\n\n" +
-          '— The Neare team',
+        subject: emailContent.subject,
+        text: emailContent.text,
       });
     } catch (e) {
       console.error('Resend error', e);
-      // Lead is already captured — confirmation email is best-effort.
     }
   }
 

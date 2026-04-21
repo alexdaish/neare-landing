@@ -2,7 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/b", "destination": "/variant-b.html" }
+    { "source": "/b", "destination": "/variant-b.html" },
+    { "source": "/de", "destination": "/de.html" },
+    { "source": "/impressum", "destination": "/impressum.html" },
+    { "source": "/datenschutz", "destination": "/datenschutz.html" }
   ],
   "headers": [
     {
