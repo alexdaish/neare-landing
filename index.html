@@ -551,6 +551,35 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     margin-top: 40px;
     line-height: 1.8;
   }
+
+  /* Scrolling quote columns. Applied by JS only when there are enough
+     testimonials to fill them — otherwise the static grid above stands. */
+  .proof .quotes.is-looping {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: 620px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+  }
+  .proof .mcol { flex: 1 1 0; min-width: 0; }
+  .proof .mcol.md-up, .proof .mcol.lg-up { display: none; }
+  @media (min-width: 760px)  { .proof .mcol.md-up { display: block; } }
+  @media (min-width: 1000px) { .proof .mcol.lg-up { display: block; } }
+  .proof .mtrack { display: flex; flex-direction: column; gap: 20px; }
+  .proof .mtrack.is-looping {
+    padding-bottom: 20px; /* matches gap, so translateY(-50%) loops seamlessly */
+    animation: quote-scroll var(--dur, 34s) linear infinite;
+    will-change: transform;
+  }
+  @keyframes quote-scroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+  }
+  /* Let people stop the motion to actually read a quote. */
+  .proof .quotes.is-looping:hover .mtrack,
+  .proof .quotes.is-looping:focus-within .mtrack { animation-play-state: paused; }
   .proof .meta strong { color: var(--navy); font-weight: 600; }
 
   /* ---------- FINAL ---------- */
@@ -919,6 +948,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
     html { scroll-behavior: auto; }
+    .proof .mtrack.is-looping { animation: none; }
   }
 </style>
 </head>
@@ -1303,7 +1333,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <section class="proof">
   <div class="wrap">
     <h2 class="reveal">Families already trying Neare</h2>
-    <div class="quotes">
+    <div class="quotes" data-quote-wall>
 
       <figure class="testimonial reveal">
         <blockquote>I used to call Dad every evening just to hear his voice and feel okay about it. Now I actually know he slept, he’s eating, he’s getting out of bed at the right time. It’s taken a weight off I didn’t realise I was carrying.</blockquote>
@@ -1405,6 +1435,58 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   } else {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
   }
+
+  // ---------- Testimonial columns ----------
+  // Progressive enhancement: the markup is a plain grid. We only rearrange it
+  // into scrolling columns when there are enough quotes to fill them, so the
+  // section never looks thin or repetitive.
+  (function () {
+    var wall = document.querySelector('[data-quote-wall]');
+    if (!wall) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cards = Array.prototype.slice.call(wall.querySelectorAll('.testimonial'));
+    var COLS = 3;
+    var MIN_TO_SCROLL = 6;
+    if (reduce || cards.length < MIN_TO_SCROLL) return;
+
+    var perCol = Math.ceil(cards.length / COLS);
+    var durations = ['34s', '42s', '38s'];
+    var breakpoints = ['', 'md-up', 'lg-up'];
+    var built = [];
+
+    for (var c = 0; c < COLS; c++) {
+      var slice = cards.slice(c * perCol, (c + 1) * perCol);
+      if (!slice.length) break;
+
+      var col = document.createElement('div');
+      col.className = 'mcol' + (breakpoints[c] ? ' ' + breakpoints[c] : '');
+      var track = document.createElement('div');
+      track.className = 'mtrack is-looping';
+      track.style.setProperty('--dur', durations[c]);
+
+      slice.forEach(function (card) {
+        // Drop the scroll-reveal: these cards move under their own animation,
+        // and clones are never observed so they'd stay invisible.
+        card.classList.remove('reveal');
+        card.classList.add('in');
+        track.appendChild(card);
+      });
+      // A second set makes translateY(-50%) loop without a visible seam.
+      slice.forEach(function (card) {
+        var copy = card.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        track.appendChild(copy);
+      });
+
+      col.appendChild(track);
+      built.push(col);
+    }
+
+    wall.textContent = '';
+    built.forEach(function (col) { wall.appendChild(col); });
+    wall.classList.add('is-looping');
+  })();
 
   // ---------- Form submission ----------
   document.querySelectorAll('[data-form]').forEach(function (form) {
