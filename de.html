@@ -1577,6 +1577,7 @@ if (window.__neare_consent === 'accepted') __neare_loadPixel();
           if (err.message === 'rate') {
             msg.textContent = "Das ging etwas schnell — warte einen Moment und versuche es erneut.";
           } else {
+            if (window.console) console.error('[neare] subscribe failed:', err.message);
             msg.textContent = 'Etwas ist schiefgelaufen — bitte versuche es erneut.';
           }
         });
