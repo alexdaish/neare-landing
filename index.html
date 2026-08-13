@@ -1452,6 +1452,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           if (err.message === 'rate') {
             msg.textContent = "You're going a bit fast — give it a moment and try again.";
           } else {
+            if (window.console) console.error('[neare] subscribe failed:', err.message);
             msg.textContent = 'Something went wrong — please try again.';
           }
         });

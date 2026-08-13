@@ -62,52 +62,37 @@ export default async function handler(req, res) {
     : '';
 
   // 1. Write to Airtable (native fetch, Node 18+)
-  let airtableOk = false;
-  try {
-    const airtableRes = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          records: [
-            {
-              fields: {
-                Email: email,
-                Variant: variant,
-                Locale: locale,
-                Status: locale === 'de' ? 'pending' : 'confirmed',
-                'Confirm Token': locale === 'de' ? confirmToken : '',
-                'UTM Source': clean(body.utm_source),
-                'UTM Medium': clean(body.utm_medium),
-                'UTM Campaign': clean(body.utm_campaign),
-                'UTM Content': clean(body.utm_content),
-                'UTM Term': clean(body.utm_term),
-                Referrer: clean(body.referrer),
-                'User Agent': clean(req.headers['user-agent'], 512),
-                IP: ip,
-              },
-            },
-          ],
-          typecast: true,
-        }),
-      }
-    );
-    if (!airtableRes.ok) {
-      const text = await airtableRes.text();
-      console.error('Airtable error', airtableRes.status, text);
-    } else {
-      airtableOk = true;
-    }
-  } catch (e) {
-    console.error('Airtable fetch threw', e);
-  }
+  const write = await createAirtableRecord({
+    apiKey: AIRTABLE_API_KEY,
+    baseId: AIRTABLE_BASE_ID,
+    tableName: AIRTABLE_TABLE_NAME,
+    fields: {
+      Email: email,
+      Variant: variant,
+      Locale: locale,
+      Status: locale === 'de' ? 'pending' : 'confirmed',
+      'Confirm Token': locale === 'de' ? confirmToken : '',
+      'UTM Source': clean(body.utm_source),
+      'UTM Medium': clean(body.utm_medium),
+      'UTM Campaign': clean(body.utm_campaign),
+      'UTM Content': clean(body.utm_content),
+      'UTM Term': clean(body.utm_term),
+      Referrer: clean(body.referrer),
+      'User Agent': clean(req.headers['user-agent'], 512),
+      IP: ip,
+    },
+  });
 
-  // 2. Best-effort confirmation email via Resend SDK
-  if (RESEND_API_KEY) {
+  const airtableOk = write.ok;
+
+  // A German signup is double opt-in: without a stored Confirm Token the link in
+  // the email can never be validated, so don't send a dead confirmation link.
+  const confirmTokenStored = locale !== 'de' || (write.ok && !write.dropped.includes('Confirm Token'));
+
+  // 2. Best-effort confirmation email via Resend SDK — only once we know the
+  // signup was actually persisted, so a failed write never looks like a success
+  // in the subscriber's inbox.
+  if (RESEND_API_KEY && airtableOk && confirmTokenStored) {
     try {
       const resend = new Resend(RESEND_API_KEY);
       const siteUrl = process.env.SITE_URL || 'https://getneare.com';
@@ -180,10 +165,86 @@ export default async function handler(req, res) {
     }
   }
 
-  if (airtableOk) {
+  if (airtableOk && confirmTokenStored) {
     res.status(200).json({ ok: true });
+  } else if (airtableOk) {
+    // Stored, but the double opt-in link can't work — surface it rather than
+    // telling a German subscriber to check for an email that never went out.
+    res.status(500).json({ error: 'storage_failed', detail: 'confirm_token_field_missing' });
   } else {
-    res.status(500).json({ error: 'storage_failed', detail: 'airtable_write_failed' });
+    res.status(500).json({
+      error: 'storage_failed',
+      detail: write.detail || 'airtable_write_failed',
+    });
+  }
+}
+
+// Airtable rejects an entire record with 422 UNKNOWN_FIELD_NAME if any single
+// field doesn't exist in the table (typecast only coerces values, it does not
+// create columns). Rather than silently dropping the signup, retry without the
+// offending field — one at a time, since Airtable reports only the first.
+const REQUIRED_FIELDS = ['Email'];
+
+async function createAirtableRecord({ apiKey, baseId, tableName, fields }) {
+  const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
+  const payload = { ...fields };
+  const dropped = [];
+
+  // Bounded: at most one attempt per optional field, plus the initial try.
+  const maxAttempts = Object.keys(payload).length + 1;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    let res;
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ records: [{ fields: payload }], typecast: true }),
+      });
+    } catch (e) {
+      console.error('Airtable fetch threw', e);
+      return { ok: false, detail: 'airtable_unreachable', dropped };
+    }
+
+    if (res.ok) {
+      if (dropped.length) {
+        console.error(
+          `Airtable: wrote record without missing field(s): ${dropped.join(', ')}. ` +
+            `Add these columns to the "${tableName}" table to stop losing this data.`
+        );
+      }
+      return { ok: true, dropped };
+    }
+
+    const text = await res.text();
+    console.error('Airtable error', res.status, text);
+
+    const unknown = unknownFieldName(res.status, text);
+    if (unknown && unknown in payload && !REQUIRED_FIELDS.includes(unknown)) {
+      delete payload[unknown];
+      dropped.push(unknown);
+      continue;
+    }
+
+    return { ok: false, detail: `airtable_${res.status}`, dropped };
+  }
+
+  return { ok: false, detail: 'airtable_schema_mismatch', dropped };
+}
+
+function unknownFieldName(status, text) {
+  if (status !== 422) return '';
+  try {
+    const parsed = JSON.parse(text);
+    const err = parsed && parsed.error;
+    if (!err || err.type !== 'UNKNOWN_FIELD_NAME') return '';
+    const match = /Unknown field name:\s*"?([^"]+)"?/.exec(err.message || '');
+    return match ? match[1].trim() : '';
+  } catch (e) {
+    return '';
   }
 }
 
