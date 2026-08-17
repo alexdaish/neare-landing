@@ -89,7 +89,7 @@ export default async function handler(req, res) {
   // the email can never be validated, so don't send a dead confirmation link.
   const confirmTokenStored = locale !== 'de' || (write.ok && !write.dropped.includes('Confirm Token'));
 
-  // 2. Best-effort confirmation email via Resend SDK — only once we know the
+  // 2. Best-effort confirmation email via Resend SDK - only once we know the
   // signup was actually persisted, so a failed write never looks like a success
   // in the subscriber's inbox.
   if (RESEND_API_KEY && airtableOk && confirmTokenStored) {
@@ -100,22 +100,22 @@ export default async function handler(req, res) {
       const emailContent =
         locale === 'de'
           ? {
-              subject: 'Bitte bestätige deine E-Mail-Adresse — Neare',
+              subject: 'Bitte bestätige deine E-Mail-Adresse für Neare',
               text:
                 'Danke für dein Interesse an Neare!\n\n' +
                 'Bitte bestätige deine E-Mail-Adresse, indem du auf den folgenden Link klickst:\n\n' +
                 `${siteUrl}/api/confirm?token=${confirmToken}\n\n` +
-                'Wir entwickeln eine neue Art, frühe Anzeichen kognitiver Veränderungen zu Hause zu erkennen — ohne Kameras, ohne Wearables, nur ein leiser Sensor und eine App, die dir sagt, wenn etwas Wichtiges passiert.\n\n' +
+                'Wir entwickeln eine neue Art, frühe Anzeichen kognitiver Veränderungen zu Hause zu erkennen: ohne Kameras, ohne Wearables, nur ein leiser Sensor und eine App, die dir sagt, wenn etwas Wichtiges passiert.\n\n' +
                 'Wir melden uns, sobald der Frühzugang verfügbar ist.\n\n' +
-                '— Das Neare-Team',
+                'Das Neare-Team',
             }
           : {
               subject: "You're on the Neare early access list",
               text:
                 "Thanks for joining the Neare waitlist.\n\n" +
-                "We're building a new way for families to notice early signs of cognitive change at home — no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
+                "We're building a new way for families to notice early signs of cognitive change at home: no cameras, no wearables, just a quiet sensor and an app that tells you when something matters.\n\n" +
                 "We'll be in touch when early access opens.\n\n" +
-                '— The Neare team',
+                'The Neare team',
             };
 
       await resend.emails.send({
@@ -168,7 +168,7 @@ export default async function handler(req, res) {
   if (airtableOk && confirmTokenStored) {
     res.status(200).json({ ok: true });
   } else if (airtableOk) {
-    // Stored, but the double opt-in link can't work — surface it rather than
+    // Stored, but the double opt-in link can't work - surface it rather than
     // telling a German subscriber to check for an email that never went out.
     res.status(500).json({ error: 'storage_failed', detail: 'confirm_token_field_missing' });
   } else {
@@ -182,7 +182,7 @@ export default async function handler(req, res) {
 // Airtable rejects an entire record with 422 UNKNOWN_FIELD_NAME if any single
 // field doesn't exist in the table (typecast only coerces values, it does not
 // create columns). Rather than silently dropping the signup, retry without the
-// offending field — one at a time, since Airtable reports only the first.
+// offending field - one at a time, since Airtable reports only the first.
 const REQUIRED_FIELDS = ['Email'];
 
 async function createAirtableRecord({ apiKey, baseId, tableName, fields }) {

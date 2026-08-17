@@ -80,13 +80,13 @@
         })
         .then(function () {
           form.classList.add('success');
-          msg.textContent = "Thanks — you're on the list. We'll be in touch.";
+          msg.textContent = "Thanks, you're on the list. We'll be in touch.";
           track('email_submit');
         })
         .catch(function (err) {
           btn.disabled = false;
           if (err.message === 'rate') {
-            msg.textContent = "You're going a bit fast — give it a moment and try again.";
+            msg.textContent = "You're going a bit fast. Give it a moment and try again.";
           } else {
             msg.textContent = 'Something went wrong. Please try again.';
           }
