@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F5F0E8">
 <meta name="facebook-domain-verification" content="d7t9w1ay7abkw90fiyrwvigwgaix82" />
-<title>Neare — See what a phone call can’t</title>
-<meta name="description" content="Neare quietly monitors your parent’s daily patterns at home — no cameras, no intrusion — and tells you when something changes. So you can act early, not react late.">
+<title>Neare: See what a phone call can’t</title>
+<meta name="description" content="Neare quietly monitors your parent’s daily patterns at home, with no cameras and no intrusion, then tells you when something changes. So you can act early, not react late.">
 <link rel="alternate" hreflang="en-GB" href="https://getneare.com/">
 <link rel="alternate" hreflang="de" href="https://getneare.com/de">
 <link rel="alternate" hreflang="x-default" href="https://getneare.com/">
@@ -315,6 +315,47 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   .card h3 { margin-bottom: 10px; }
   .card p { color: var(--navy-soft); font-size: 16px; margin: 0; line-height: 1.6; }
 
+  /* Centred eyebrow + heading + standfirst above a section. */
+  .section-head { text-align: center; max-width: 620px; margin: 0 auto 56px; }
+  .how .section-head h2 { margin-bottom: 0; }
+  .section-head .eyebrow { margin-bottom: 12px; }
+  .section-head .sub {
+    color: var(--navy-soft);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 16px 0 0;
+  }
+
+  /* Numbered step cards. */
+  .how .card { position: relative; }
+  .how .step-num {
+    position: absolute;
+    top: 30px;
+    right: 28px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--sage-deep);
+    background: var(--sage-soft);
+    border: 1px solid rgba(110, 138, 109, .24);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .how .icon-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: var(--sage-soft);
+    border: 1px solid rgba(110, 138, 109, .24);
+    margin-bottom: 22px;
+  }
+  .how .icon-tile .card-icon { width: 28px; height: 28px; margin: 0; }
+
   /* ---------- BENEFITS ---------- */
   .benefits { background: var(--stone); }
   .benefits .card { background: var(--stone-warm); }
@@ -554,7 +595,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
 
   /* Scrolling quote columns. Applied by JS only when there are enough
-     testimonials to fill them — otherwise the static grid above stands. */
+     testimonials to fill them - otherwise the static grid above stands. */
   .proof .quotes.is-looping {
     display: flex;
     justify-content: center;
@@ -826,7 +867,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   .phone-tab svg { width: 14px; height: 14px; }
   .phone-tab.active { color: var(--navy); }
 
-  /* Variant B phone content — "What should I do?" */
+  /* Variant B phone content - "What should I do?" */
   .context-card {
     background: var(--stone-warm);
     border-radius: 16px;
@@ -969,7 +1010,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
       <h1 data-hero-h1>See what a phone call can’t.</h1>
-      <p class="lede" data-hero-lede>Neare quietly monitors your parent’s daily patterns at home — no cameras, no intrusion — and tells you when something changes. So you can act early, not react late.</p>
+      <p class="lede" data-hero-lede>Neare quietly monitors your parent’s daily patterns at home, with no cameras and no intrusion, then tells you when something changes. So you can act early, not react late.</p>
 
       <form class="capture" data-form>
         <label class="sr" for="email-1">Email address</label>
@@ -1014,7 +1055,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
             <div class="phone-alert">
               <p class="phone-alert-title">Mum's been getting up at night more often this week.</p>
-              <p class="phone-alert-sub">3 nights in the last 7 — up from her usual 1.</p>
+              <p class="phone-alert-sub">3 nights in the last 7, up from her usual 1.</p>
               <span class="phone-btn">What should I do?</span>
               <p class="phone-dismiss">Dismiss</p>
             </div>
@@ -1045,42 +1086,55 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   <div class="wrap narrow reveal">
     <p class="big">You call and they sound fine. But between visits, you have no idea what’s really happening.</p>
     <p>There’s nothing between GP appointments that happen every three to six months. No early warning. No objective picture. Just guilt, worry, and guesswork.</p>
-    <p class="bridge">Neare fills that gap — a continuous, gentle signal so you notice changes weeks before they become a crisis.</p>
+    <p class="bridge">Neare fills that gap: a continuous, gentle signal so you notice changes weeks before they become a crisis.</p>
   </div>
 </section>
 
 <!-- ========== HOW IT WORKS ========== -->
 <section id="how" class="how">
   <div class="wrap">
-    <h2 class="reveal">How it works</h2>
+    <div class="section-head reveal">
+      <p class="eyebrow">Three simple steps</p>
+      <h2>How it works</h2>
+      <p class="sub">No cameras, no wearables, and nothing for your parent to set up, charge or remember. One plug-in sensor. Neare does the rest.</p>
+    </div>
     <div class="grid-3">
 
       <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="20" y="18" width="24" height="28" rx="6"/>
-          <circle cx="32" cy="30" r="3.5"/>
-          <path d="M32 42h.01"/>
-          <path d="M44 34c3 0 5-2 5-5M20 34c-3 0-5-2-5-5"/>
-        </svg>
+        <span class="step-num" aria-hidden="true">01</span>
+        <span class="icon-tile">
+          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="20" y="18" width="24" height="28" rx="6"/>
+            <circle cx="32" cy="30" r="3.5"/>
+            <path d="M32 42h.01"/>
+            <path d="M44 34c3 0 5-2 5-5M20 34c-3 0-5-2-5-5"/>
+          </svg>
+        </span>
         <h3>Place the sensor</h3>
-        <p>A small plug-in radar device — no cameras, no wearables, nothing for your parent to do. It works quietly in the background. Most people forget it’s there.</p>
+        <p>A small plug-in radar device. No cameras, no wearables, nothing for your parent to do. It works quietly in the background. Most people forget it’s there.</p>
       </article>
 
       <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 38 Q16 20 24 38 T40 38 T56 38"/>
-          <circle cx="56" cy="38" r="3"/>
-        </svg>
+        <span class="step-num" aria-hidden="true">02</span>
+        <span class="icon-tile">
+          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 38 Q16 20 24 38 T40 38 T56 38"/>
+            <circle cx="56" cy="38" r="3"/>
+          </svg>
+        </span>
         <h3>Neare learns their rhythm</h3>
-        <p>Over the first two weeks it builds a picture of what normal looks like — then watches for meaningful changes, not noise. No false alarms. No alert fatigue.</p>
+        <p>Over the first two weeks it builds a picture of what normal looks like, then watches for meaningful changes, not noise. No false alarms. No alert fatigue.</p>
       </article>
 
       <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="18" y="10" width="28" height="44" rx="6"/>
-          <path d="M26 24h12M26 32h12M26 40h8"/>
-          <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
-        </svg>
+        <span class="step-num" aria-hidden="true">03</span>
+        <span class="icon-tile">
+          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="18" y="10" width="28" height="44" rx="6"/>
+            <path d="M26 24h12M26 32h12M26 40h8"/>
+            <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
+          </svg>
+        </span>
         <h3>You get guidance, not data</h3>
         <p>When something shifts, Neare tells you what changed, what it might mean, and what to do. Share a GP-ready summary in one tap.</p>
       </article>
@@ -1096,9 +1150,9 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       <div class="practice-copy reveal">
         <p class="eyebrow">In practice</p>
         <h2>Not just alerts.<br>Guidance you can act on.</h2>
-        <p>When Neare spots a change, it doesn't just flag it. It explains what's different, why it might matter, and gives you a clear next step — so you never feel helpless.</p>
+        <p>When Neare spots a change, it doesn't just flag it. It explains what's different, why it might matter, and gives you a clear next step, so you never feel helpless.</p>
         <p>No medical jargon. No data overload. Just a calm, clear voice saying: here's what's happening, and here's what you can do.</p>
-        <p class="pull">"Dad's been getting up more at night. Here's what that might mean — and a summary you can share with his GP."</p>
+        <p class="pull">"Dad's been getting up more at night. Here's what that might mean, and a summary you can share with his GP."</p>
       </div>
       <div class="phone-stage reveal">
         <div class="phone">
@@ -1115,7 +1169,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
             <div class="context-card">
               <p class="phone-label">What we noticed</p>
-              <p>Night-time movement increased to 3 of the last 7 nights — up from his usual average of 1. The pattern started 5 days ago.</p>
+              <p>Night-time movement increased to 3 of the last 7 nights, up from his usual average of 1. The pattern started 5 days ago.</p>
             </div>
 
             <div class="guided">
@@ -1130,7 +1184,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
                 <span class="num">2</span>
                 <div>
                   <p class="step-title">Check for common causes</p>
-                  <div class="speech">Pain, new medication, needing the loo more, anxiety — all worth ruling out.</div>
+                  <div class="speech">Pain, new medication, needing the loo more, anxiety: all worth ruling out.</div>
                 </div>
               </div>
               <div class="guided-step">
@@ -1142,7 +1196,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
               </div>
             </div>
 
-            <p class="phone-closer">Neare gives you the words — not just the data.</p>
+            <p class="phone-closer">Neare gives you the words, not just the data.</p>
 
             <div class="phone-tabs">
               <span class="phone-tab">
@@ -1185,7 +1239,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <path d="M10 34 L32 16 L54 34 V52 H10 Z"/>
           <path d="M28 52 V38 H36 V52"/>
         </svg>
-        <h3>The reassurance of presence — without being there.</h3>
+        <h3>The reassurance of presence, without being there.</h3>
         <p>A quiet background layer of awareness, even when you live an hour away.</p>
       </article>
 
@@ -1208,7 +1262,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
     <details class="reveal">
       <summary>Will it actually work?</summary>
-      <p>Neare uses clinically-informed radar sensing — the same technology used in hospital fall detection — to track gait, sleep and daily routine. No false alarms from the cat. We’re building with families, not just for them.</p>
+      <p>Neare uses clinically-informed radar sensing, the same technology used in hospital fall detection, to track gait, sleep and daily routine. No false alarms from the cat. We’re building with families, not just for them.</p>
     </details>
 
     <details class="reveal">
@@ -1218,12 +1272,12 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
     <details class="reveal">
       <summary>What makes Neare different?</summary>
-      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It’s a single plug-in device that sees movement, not images — the same radar technology used in hospital fall detection — so your parent keeps their privacy and their independence. And instead of dumping raw data on you, Neare tells you only when something has meaningfully changed, and what to do about it.</p>
+      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It’s a single plug-in device that sees movement, not images (the same radar technology used in hospital fall detection), so your parent keeps their privacy and their independence. And instead of dumping raw data on you, Neare tells you only when something has meaningfully changed, and what to do about it.</p>
     </details>
 
     <details class="reveal">
       <summary>Is it worth £29 a month?</summary>
-      <p>Most families already spend £50–150 a month on care support. Neare costs less than a weekly cleaner — and it’s watching every hour, not just one afternoon.</p>
+      <p>Most families already spend £50–150 a month on care support. Neare costs less than a weekly cleaner, and it’s watching every hour, not just one afternoon.</p>
     </details>
   </div>
 </section>
@@ -1245,7 +1299,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <ellipse cx="140" cy="90" rx="56" ry="25" fill="none" stroke="#8FA98F" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 5"/>
           <ellipse cx="140" cy="90" rx="34" ry="15" fill="none" stroke="#8FA98F" stroke-opacity=".35" stroke-width="1"/>
 
-          <!-- device body — cylinder -->
+          <!-- device body - cylinder -->
           <path d="M118 130 L118 88 Q118 72 140 68 Q162 72 162 88 L162 130" fill="#FBFAF6" stroke="#D6D1C8" stroke-width="1.2"/>
           <!-- domed top -->
           <ellipse cx="140" cy="88" rx="22" ry="8" fill="#FBFAF6" stroke="#D6D1C8" stroke-width="1.2"/>
@@ -1263,7 +1317,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </svg>
         <h3>The Neare sensor</h3>
         <p>A small, matte-white device about the size of a candle. No screen, no LEDs, no buttons. Plug it in, place it on a shelf or side table, and forget it's there.</p>
-        <p>It uses radar — not cameras or microphones — to read movement patterns throughout the home. Your parent's privacy stays completely intact.</p>
+        <p>It uses radar, not cameras or microphones, to read movement patterns throughout the home. Your parent's privacy stays completely intact.</p>
         <p class="detail">Included with your subscription · No upfront cost · Plug-in, no installation</p>
       </article>
 
@@ -1306,7 +1360,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
           <ellipse cx="140" cy="148" rx="40" ry="3" fill="#2C3E50" opacity=".04"/>
         </svg>
         <h3>The Neare app</h3>
-        <p>A calm, clear window into your parent's daily rhythm. See at a glance whether their day looks normal — and get guidance when something shifts.</p>
+        <p>A calm, clear window into your parent's daily rhythm. See at a glance whether their day looks normal, and get guidance when something shifts.</p>
         <p>Share updates with family members. Export GP-ready summaries in one tap. No data overload, just the information that matters.</p>
         <p class="detail">iOS + Android · Invite up to 5 family members · Weekly email summaries</p>
       </article>
@@ -1348,7 +1402,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       </figure>
 
       <figure class="testimonial reveal">
-        <blockquote>Mum was adamant she didn’t want a camera in the house and I agreed with her. Neare is the first thing we’ve both been comfortable with — she forgets it’s there, and I finally stopped lying awake at 2am.</blockquote>
+        <blockquote>Mum was adamant she didn’t want a camera in the house and I agreed with her. Neare is the first thing we’ve both been comfortable with. She forgets it’s there, and I finally stopped lying awake at 2am.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">JT</div>
           <div>
@@ -1371,7 +1425,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
 
       <figure class="testimonial reveal">
-        <blockquote>I can’t sleep unless I know what she’s doing. Mom fell taking a shower at three in the morning, and the bathroom is the one place I’d never put a camera — I wouldn’t do that to her. Knowing she’s in and out safely, that she made it down the stairs — that’s the gap nothing else covers.</blockquote>
+        <blockquote>I can’t sleep unless I know what she’s doing. Mom fell taking a shower at three in the morning, and the bathroom is the one place I’d never put a camera. I wouldn’t do that to her. Knowing she’s in and out safely, that she made it down the stairs: that’s the gap nothing else covers.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">SV</div>
           <div>
@@ -1382,7 +1436,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       </figure>
 
       <figure class="testimonial reveal">
-        <blockquote>Her watch can tell me when she’s fallen. It stops her from dying — it doesn’t stop the fall. We’re past detection; we want to prevent something. And with Mum, what she says and what she does are two different things. Seeing the real pattern, even when I’m travelling, is one less thing to worry about.</blockquote>
+        <blockquote>Her watch can tell me when she’s fallen. It stops her from dying. It doesn’t stop the fall. We’re past detection; we want to prevent something. And with Mum, what she says and what she does are two different things. Seeing the real pattern, even when I’m travelling, is one less thing to worry about.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">KH</div>
           <div>
@@ -1393,7 +1447,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       </figure>
 
       <figure class="testimonial reveal">
-        <blockquote>Mum had an eye operation under general anaesthetic and didn’t tell me until I was back from my holiday — she didn’t want to spoil it. She’s not always good at telling me what’s wrong. So just seeing the basics — she’s sleeping, she’s eating, she’s moving around — is reassuring in itself. If she stopped going into the kitchen, I’d know to ask why.</blockquote>
+        <blockquote>Mum had an eye operation under general anaesthetic and didn’t tell me until I was back from my holiday. She didn’t want to spoil it. She’s not always good at telling me what’s wrong. So just seeing the basics (she’s sleeping, she’s eating, she’s moving around) is reassuring in itself. If she stopped going into the kitchen, I’d know to ask why.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">JB</div>
           <div>
@@ -1447,9 +1501,9 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   if (variant === 'B') {
     var h1 = document.querySelector('[data-hero-h1]');
     var lede = document.querySelector('[data-hero-lede]');
-    if (h1) h1.textContent = 'Notice the changes that matter — weeks before a crisis.';
+    if (h1) h1.textContent = 'Notice the changes that matter, weeks before a crisis.';
     if (lede) lede.textContent = 'Neare is a quiet home sensor and caregiver app that watches your parent’s daily patterns and tells you when something shifts. So small signals never turn into emergencies.';
-    document.title = 'Neare — Notice the changes that matter';
+    document.title = 'Neare: Notice the changes that matter';
   }
 
   // ---------- UTM capture ----------
@@ -1565,15 +1619,15 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         })
         .then(function () {
           form.classList.add('success');
-          msg.textContent = "You're on the list — we'll be in touch.";
+          msg.textContent = "You're on the list. We'll be in touch.";
         })
         .catch(function (err) {
           btn.disabled = false;
           if (err.message === 'rate') {
-            msg.textContent = "You're going a bit fast — give it a moment and try again.";
+            msg.textContent = "You're going a bit fast. Give it a moment and try again.";
           } else {
             if (window.console) console.error('[neare] subscribe failed:', err.message);
-            msg.textContent = 'Something went wrong — please try again.';
+            msg.textContent = 'Something went wrong. Please try again.';
           }
         });
     });

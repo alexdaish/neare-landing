@@ -75,7 +75,7 @@ export default async function handler(req, res) {
 function successPage() {
   return page(
     'Bestätigt!',
-    'Danke — deine E-Mail-Adresse ist bestätigt. Du stehst jetzt auf der Neare-Warteliste. Wir melden uns, sobald der Frühzugang in Deutschland verfügbar ist.'
+    'Danke, deine E-Mail-Adresse ist bestätigt. Du stehst jetzt auf der Neare-Warteliste. Wir melden uns, sobald der Frühzugang in Deutschland verfügbar ist.'
   );
 }
 
@@ -89,7 +89,7 @@ function page(title, body) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${title} — Neare</title>
+<title>${title} · Neare</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
   body { margin:0; font:17px/1.65 "DM Sans",sans-serif; background:#F5F0E8; color:#1F2A36; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:24px; }
