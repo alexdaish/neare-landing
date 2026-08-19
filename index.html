@@ -1392,6 +1392,40 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   .btn--quiet:hover { background: #fff; color: var(--navy); }
   .tier-note { color: var(--mute); font-size: 13.5px; margin: 26px auto 0; text-align: center; }
 
+
+  /* ---------- WHAT'S INCLUDED: full-bleed card images ---------- */
+  /* The card's own padding used to inset the photo, leaving a gutter of card
+     fill around it. Padding now lives on the text block, and the card clips
+     the image with its own radius. */
+  .included-card { padding: 0; overflow: hidden; }
+  .included-photo {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--stone);
+  }
+  .included-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .included-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 28px 30px 26px;
+  }
+  /* The hairline meta line at the foot of each card. */
+  .included-card .incl-note {
+    font-size: 13px;
+    color: var(--mute);
+    line-height: 1.5;
+    margin: auto 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
 </style>
 </head>
 
@@ -1729,8 +1763,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     <div class="included-grid">
 
       <article class="included-card reveal">
-        <div class="step-photo" style="aspect-ratio:16/10;border-radius:0;border:0;box-shadow:none;margin:0">
-          <img src="assets/hero-bg.webp" alt="The Neare sensor on a side table at home, beside framed photographs" loading="lazy" decoding="async">
+        <div class="included-photo">
+          <img src="assets/included-sensor.jpeg" alt="The Neare sensor on a sideboard at home, beside a wall of framed photographs" loading="lazy" decoding="async">
         </div>
         <div class="included-body">
           <h3>The Neare sensor</h3>
@@ -1741,7 +1775,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       </article>
 
       <article class="included-card reveal">
-        <div class="step-photo" style="aspect-ratio:16/10;border-radius:0;border:0;box-shadow:none;margin:0">
+        <div class="included-photo">
           <img src="assets/Gemini_Generated_Image_8lufrd8lufrd8luf.jpeg" alt="The Neare app open on a phone on a kitchen table over morning coffee" loading="lazy" decoding="async">
         </div>
         <div class="included-body">
