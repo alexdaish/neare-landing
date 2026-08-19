@@ -992,6 +992,331 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     html { scroll-behavior: auto; }
     .proof .mtrack.is-looping { animation: none; }
   }
+
+  /* ========== PERSON-LED REFRESH ========== */
+
+  /* Shared two-column split used by dashboard preview, guidance, For them. */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+  @media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; } }
+  .split .phone-stage { justify-self: center; }
+
+  /* ---------- HERO: diptych ---------- */
+  .hero-diptych { position: relative; padding-bottom: 104px; }
+  .dip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(44, 62, 80, .06), 0 22px 48px rgba(44, 62, 80, .13);
+  }
+  .dip-frame { position: relative; aspect-ratio: 5/6; background: var(--stone-warm); }
+  .dip-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dip-cap {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    pointer-events: none;
+    background: rgba(245, 240, 232, .86);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  /* Awaiting the real hero-child photograph. */
+  .dip-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    color: var(--mute);
+    font-size: 13px;
+    line-height: 1.5;
+    background: var(--stone-warm);
+  }
+  .hero-sensor {
+    position: absolute;
+    left: calc(50% + 44px);
+    bottom: 4px;
+    width: 152px;
+    z-index: 1;
+    filter: drop-shadow(0 16px 26px rgba(31, 42, 54, .20));
+    pointer-events: none;
+  }
+  .goodday {
+    position: absolute;
+    left: calc(50% - 48px);
+    bottom: 0;
+    transform: translateX(-50%);
+    width: min(80%, 256px);
+    z-index: 2;
+  }
+  .goodday-card {
+    background: var(--stone-warm);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(44, 62, 80, .06), 0 22px 48px rgba(44, 62, 80, .13);
+    padding: 15px 16px 14px;
+  }
+  .goodday-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; }
+  .goodday-head .brand { font-size: 13px; font-weight: 700; letter-spacing: -.01em; color: var(--navy); }
+  .goodday-head .when { font-size: 11px; color: var(--mute); }
+  .goodday-line { display: block; width: 100%; height: 24px; margin: 2px 0 11px; }
+  .goodday-ticks { display: flex; flex-direction: column; gap: 7px; }
+  .goodday-ticks span { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--navy); }
+
+  /* Sage status pill, reused in the hero card and both phone screens. */
+  .wellpill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--sage-soft);
+    color: var(--sage-deep);
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .wellpill i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 3px rgba(143, 169, 143, .25);
+  }
+
+  /* Ticks that draw themselves on, hold, then loop. */
+  @keyframes neare-check-draw {
+    0%   { stroke-dashoffset: 22px; }
+    20%  { stroke-dashoffset: 0; }
+    84%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 22px; }
+  }
+  .neare-check { width: 14px; height: 14px; flex-shrink: 0; }
+  .neare-check path {
+    fill: none;
+    stroke: var(--sage-deep);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 22px;
+    stroke-dashoffset: 22px;
+    animation: neare-check-draw 4.2s cubic-bezier(.4, 0, .2, 1) infinite;
+  }
+
+  /* ---------- APP SCREEN (both phone mockups) ---------- */
+  .as-head { display: flex; justify-content: space-between; align-items: center; margin: 6px 0 16px; }
+  .as-head .brand { font-size: 14px; font-weight: 700; letter-spacing: -.01em; color: var(--navy); }
+  .as-head .meta { font-size: 12px; color: var(--mute); }
+  .as-pill { align-self: flex-start; font-size: 13px; padding: 6px 12px; margin-bottom: 14px; }
+  .as-h { font-size: 22px; font-weight: 500; letter-spacing: -.015em; color: var(--navy); margin: 0 0 16px; line-height: 1.2; }
+  .as-h.sm { font-size: 21px; line-height: 1.25; margin-bottom: 10px; }
+  .as-sub { font-size: 14px; line-height: 1.55; color: var(--navy-soft); margin: 0 0 16px; }
+  .as-card { background: var(--stone-warm); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; }
+  .as-kicker { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); margin: 0 0 6px; font-weight: 600; }
+  .as-card p.strong { font-size: 13.5px; font-weight: 600; color: var(--navy); margin: 0 0 10px; line-height: 1.4; }
+  .as-card svg { display: block; width: 100%; height: 26px; }
+  .as-rows { display: flex; flex-direction: column; gap: 11px; margin-bottom: 14px; }
+  .as-row { display: flex; align-items: center; gap: 11px; }
+  .as-row .tick {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--sage-soft); color: var(--sage-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .as-row .what { flex: 1; font-size: 13.5px; color: var(--navy); }
+  .as-row .at { font-size: 12.5px; color: var(--mute); }
+  .as-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+  .as-bars { display: flex; align-items: flex-end; gap: 5px; height: 26px; }
+  .as-bars span { width: 7px; background: var(--sage); border-radius: 3px; }
+  .as-foot .note { font-size: 12px; color: var(--mute); }
+  /* Reply-tail corner: this bubble lands last, like a chat reply after a beat. */
+  .as-pop { border-radius: 16px 16px 16px 4px; transform-origin: left bottom; }
+  .as-cta { margin-top: auto; }
+
+  /* ---------- HOW IT WORKS: photo step cards ---------- */
+  .step-photo {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 8px 20px rgba(44, 62, 80, .06);
+    background: var(--stone);
+    margin-bottom: 22px;
+  }
+  .step-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .how .card { background: none; border: 0; border-radius: 0; padding: 0; box-shadow: none; display: flex; flex-direction: column; }
+  .how .step-dot {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--sage-soft); color: var(--sage-deep);
+    font-size: 13px; font-weight: 700; margin-bottom: 14px;
+  }
+
+  /* ---------- GUIDANCE: numbered walk-through ---------- */
+  .worked { margin-top: 30px; display: flex; flex-direction: column; gap: 20px; max-width: 520px; }
+  .worked-row { display: flex; gap: 16px; align-items: flex-start; }
+  .worked-row .n {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--sage-soft); color: var(--sage-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .worked-row p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--navy-soft); }
+  .worked-row p.lead { margin: 2px 0 2px; font-weight: 600; color: var(--navy); }
+
+  /* ---------- BENEFITS: person-led photography ---------- */
+  .benefit-photo {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 8px 20px rgba(44, 62, 80, .06);
+    background: var(--stone);
+    margin-bottom: 22px;
+  }
+  .benefit-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .benefits .card { background: none; border: 0; border-radius: 0; padding: 0; box-shadow: none; display: flex; flex-direction: column; }
+  .benefits .card h3 { font-size: 20px; line-height: 1.25; margin-bottom: 8px; }
+
+  /* ---------- FOR THEM ---------- */
+  .forthem { background: var(--stone); }
+  .forthem-photo {
+    position: relative;
+    aspect-ratio: 5/6;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 6px rgba(44, 62, 80, .06), 0 22px 48px rgba(44, 62, 80, .13);
+    background: var(--stone-warm);
+  }
+  .forthem-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .promises { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 22px; }
+  .promises span {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--stone-warm); border: 1px solid var(--line);
+    color: var(--navy); border-radius: 999px;
+    padding: 9px 15px; font-size: 14.5px; font-weight: 600;
+  }
+  .promises span b { color: var(--sage-deep); font-weight: 700; }
+  .forthem .closer { font-size: 18px; line-height: 1.65; color: var(--navy); font-weight: 500; margin: 0; max-width: 500px; }
+
+  /* ---------- OUTCOMES BAND ---------- */
+  .outcomes { background: var(--stone-warm); padding: clamp(56px, 7vw, 84px) 0; }
+  .outcomes-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr;
+    gap: clamp(28px, 5vw, 64px); text-align: center;
+  }
+  @media (min-width: 700px) { .outcomes-grid { grid-template-columns: repeat(3, 1fr); } }
+  .outcomes .fig {
+    font-size: clamp(40px, 5vw, 58px); line-height: 1; font-weight: 500;
+    letter-spacing: -.03em; color: var(--navy); margin: 0 0 10px;
+  }
+  .outcomes .fig small { font-size: .4em; font-weight: 600; color: var(--mute); letter-spacing: 0; }
+  .outcomes .cap { font-size: 15.5px; line-height: 1.5; color: var(--navy-soft); margin: 0 auto; max-width: 220px; }
+
+  /* ---------- FULL-BLEED PHOTO BREAK ---------- */
+  .photo-break { position: relative; height: clamp(340px, 54vw, 560px); overflow: hidden; background: var(--stone); padding: 0; }
+  .photo-break img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-break .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(245, 240, 232, .9) 0%, rgba(245, 240, 232, .55) 46%, rgba(245, 240, 232, .08) 82%);
+  }
+  .photo-break .wrap { position: relative; height: 100%; display: flex; align-items: center; }
+  .photo-break p {
+    max-width: 540px; margin: 0;
+    font-size: clamp(24px, 3.6vw, 40px); line-height: 1.22;
+    font-weight: 500; letter-spacing: -.02em; color: var(--navy);
+  }
+
+  /* ---------- TESTIMONIALS: three scrolling columns ---------- */
+  .proof .quotes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 1120px;
+    margin: 52px auto 0;
+  }
+  @media (min-width: 768px) { .proof .quotes { grid-template-columns: repeat(3, 1fr); align-items: start; } }
+  .proof .quotes.is-looping {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    max-width: 1120px;
+    margin: 52px auto 0;
+    max-height: 720px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  }
+  .proof .mcol { width: 100%; max-width: 336px; }
+  .proof .mcol.md-up, .proof .mcol.lg-up { display: none; }
+  @media (min-width: 768px)  { .proof .mcol.md-up { display: block; } }
+  @media (min-width: 1024px) { .proof .mcol.lg-up { display: block; } }
+  .proof .mtrack {
+    display: flex; flex-direction: column; gap: 24px;
+    padding-bottom: 24px; /* matches gap so translateY(-50%) loops seamlessly */
+    animation: neare-tscroll var(--dur, 34s) linear infinite;
+    will-change: transform;
+  }
+  @keyframes neare-tscroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+  .proof .quotes:hover .mtrack,
+  .proof .quotes:focus-within .mtrack { animation-play-state: paused; }
+  .proof .testimonial { flex-shrink: 0; padding: 28px 28px 26px; }
+  .proof .testimonial blockquote { font-size: 15.5px; line-height: 1.62; margin-bottom: 20px; }
+  .proof .testimonial figcaption { border-top: 0; padding-top: 0; margin-top: 20px; gap: 11px; }
+  .proof .testimonial .avatar { width: 40px; height: 40px; font-size: 13px; }
+  .proof .testimonial .name { font-size: 14.5px; }
+  .proof .testimonial .role { font-size: 13px; }
+
+  /* Calm is a brand rule: none of the above runs if motion is unwelcome. */
+  @media (prefers-reduced-motion: reduce) {
+    .neare-check path { animation: none !important; stroke-dashoffset: 0 !important; }
+    .proof .mtrack { animation: none !important; }
+  }
+  @media print {
+    .reveal, .reveal.in { opacity: 1 !important; transform: none !important; }
+    .neare-check path { animation: none !important; stroke-dashoffset: 0 !important; }
+    .proof .mtrack { animation: none !important; }
+  }
+
+  /* The old hero art was a centred SVG, so .hero-art is a flex container. The
+     diptych's photos are absolutely positioned, so as a flex item it has no
+     intrinsic width and collapses. Make it fill the column instead. */
+  /* The sensor and good-day card deliberately break the diptych's bounds, so the
+     hero clips its own overflow. The design prototype did this on its root wrapper. */
+  .hero { overflow-x: hidden; }
+  .hero-art { display: block; }
+  /* The old hero art was one big inline SVG, so '.hero-art svg' stretched it to
+     100%. That rule must not capture the good-day card's ticks and sparkline. */
+  .hero-art svg { width: auto; max-width: none; }
+  .hero-art .goodday-line { width: 100%; height: 24px; }
+  .hero-art .neare-check { width: 14px; height: 14px; }
+  .hero h1 { text-wrap: balance; }
+  .hero-diptych { width: 100%; }
+  /* The design gives the art equal billing with the copy. */
+  @media (min-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 60px); }
+  }
+  .hero-grid { padding-top: clamp(28px, 5vw, 56px); }
+
+  /* The refreshed hero sits on plain stone, not the old photographic background. */
+  .hero { background-image: none; background: var(--stone); }
+
 </style>
 </head>
 
@@ -1009,70 +1334,43 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   </header>
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
-      <h1 data-hero-h1>See what a phone call can’t.</h1>
-      <p class="lede" data-hero-lede>Neare quietly monitors your parent’s daily patterns at home, with no cameras and no intrusion, then tells you when something changes. So you can act early, not react late.</p>
-
+      <h1 data-hero-h1>See what a phone call can&rsquo;t.</h1>
+      <p class="lede" data-hero-lede>Neare quietly monitors your parent&rsquo;s daily patterns at home, with no cameras and no intrusion, then tells you when something changes. So you can act early, not react late.</p>
       <form class="capture" data-form>
         <label class="sr" for="email-1">Email address</label>
         <input id="email-1" type="email" name="email" required placeholder="your@email.com" autocomplete="email">
         <button type="submit">Join the early access list</button>
         <p class="form-msg" data-msg></p>
       </form>
-      <p class="reassure">We’ll let you know when Neare is ready. No spam, ever.</p>
-      <a class="ghost" href="#how">See how it works ↓</a>
+      <p class="reassure">We&rsquo;ll let you know when Neare is ready. No spam, ever.</p>
+      <p class="ghost"><a href="#how">See how it works &darr;</a></p>
     </div>
 
-    <div class="hero-art reveal" aria-hidden="true">
-      <div class="phone-stage">
-        <div class="phone tilted">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="phone-head">
-              <span class="phone-brand">neare</span>
-              <svg class="phone-icon-btn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <div class="hero-art reveal">
+      <div class="hero-diptych">
+        <div class="dip">
+          <div class="dip-frame">
+            <img src="assets/hero-child.jpeg" alt="An adult daughter cooking in her own kitchen, unhurried" loading="eager" decoding="async">
+            <span class="dip-cap">You &middot; Kent</span>
+          </div>
+          <div class="dip-frame">
+            <img src="assets/hero-parent.jpeg" alt="Her mother watering plants in her own bright sitting room" loading="eager" decoding="async">
+            <span class="dip-cap">Mum &middot; Yorkshire</span>
+          </div>
+        </div>
+        <img class="hero-sensor" src="assets/neare-sensor.png" alt="" width="456" height="456" aria-hidden="true" decoding="async">
+        <div class="goodday">
+          <div class="goodday-card">
+            <div class="goodday-head">
+              <span class="brand">neare</span>
+              <span class="when">Today</span>
             </div>
-            <p class="phone-title">Today</p>
-            <span class="phone-pill">✓ Mum's day looks normal</span>
-
-            <div class="phone-card">
-              <p class="phone-label">Daily rhythm <span class="time">Updated 08:14</span></p>
-              <div class="rhythm-bars">
-                <span style="height:60%"></span>
-                <span style="height:85%"></span>
-                <span style="height:40%"></span>
-                <span style="height:70%"></span>
-                <span style="height:55%"></span>
-                <span style="height:90%"></span>
-                <span style="height:75%"></span>
-              </div>
-              <div class="rhythm-row">
-                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Morning routine</span>
-                <span class="item done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Active around house</span>
-                <span class="item mute">○ Afternoon rest</span>
-                <span class="item mute">○ Evening</span>
-              </div>
-            </div>
-
-            <div class="phone-alert">
-              <p class="phone-alert-title">Mum's been getting up at night more often this week.</p>
-              <p class="phone-alert-sub">3 nights in the last 7, up from her usual 1.</p>
-              <span class="phone-btn">What should I do?</span>
-              <p class="phone-dismiss">Dismiss</p>
-            </div>
-
-            <div class="phone-tabs">
-              <span class="phone-tab active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                Today
-              </span>
-              <span class="phone-tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-8"/></svg>
-                Summary
-              </span>
-              <span class="phone-tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                Family
-              </span>
+            <span class="wellpill"><i></i> All well today</span>
+            <svg class="goodday-line" viewBox="0 0 210 26" fill="none" aria-hidden="true"><path d="M2 13 Q28 5 54 13 T106 13 T158 13 T208 13" stroke="var(--sage)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/></svg>
+            <div class="goodday-ticks">
+              <span><svg class="neare-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4l10-11" style="animation-delay:0s"/></svg> Slept well</span>
+              <span><svg class="neare-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4l10-11" style="animation-delay:.22s"/></svg> Up at 7:40</span>
+              <span><svg class="neare-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4l10-11" style="animation-delay:.44s"/></svg> Kitchen as usual</span>
             </div>
           </div>
         </div>
@@ -1081,11 +1379,60 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ========== PROBLEM ========== -->
+<!-- ========== DASHBOARD PREVIEW (the calm good day) ========== -->
+<section class="benefits">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">Most days</p>
+      <h2>A calm picture of an ordinary day.</h2>
+      <p>Open Neare and you see what you hope to see. She slept well. She&rsquo;s up and about. The kitchen&rsquo;s been busy at the usual times.</p>
+      <p>Nothing to do. Just the quiet confidence that today looks like her. Most days look like this. Neare only speaks up when something changes.</p>
+    </div>
+    <div class="phone-stage reveal">
+      <div class="phone" style="width:300px">
+        <div class="phone-screen" style="height:652px;box-sizing:border-box;display:flex;flex-direction:column">
+          <div class="phone-notch"></div>
+          <div data-appscreen style="display:contents">
+            <div class="as-head">
+              <span class="brand">neare</span>
+              <span class="meta">Tue &middot; Today</span>
+            </div>
+            <span class="wellpill as-pill"><i></i> All well today</span>
+            <p class="as-h">Mum&rsquo;s having a normal day.</p>
+            <div class="as-card">
+              <p class="as-kicker">Through the night</p>
+              <p class="strong">Slept well. Settled by 10:40, no restless spells.</p>
+              <svg viewBox="0 0 244 28" fill="none" aria-hidden="true"><path data-app-line d="M2 20 Q22 8 40 15 T80 14 T120 18 T160 9 T200 15 T242 12" stroke="var(--sage)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/></svg>
+            </div>
+            <div class="as-rows">
+              <div class="as-row"><span class="tick">&#10003;</span><span class="what">Up and about</span><span class="at">7:40</span></div>
+              <div class="as-row"><span class="tick">&#10003;</span><span class="what">Kitchen, as usual</span><span class="at">8:05 &middot; 12:30 &middot; 6pm</span></div>
+              <div class="as-row"><span class="tick">&#10003;</span><span class="what">Out for a walk</span><span class="at">11:20</span></div>
+            </div>
+            <div class="as-foot">
+              <div class="as-bars">
+                <span data-app-bar style="height:60%;opacity:.45"></span>
+                <span data-app-bar style="height:80%;opacity:.55"></span>
+                <span data-app-bar style="height:70%;opacity:.5"></span>
+                <span data-app-bar style="height:90%;opacity:.6"></span>
+                <span data-app-bar style="height:75%;opacity:.5"></span>
+                <span data-app-bar style="height:85%;opacity:.55"></span>
+                <span data-app-bar style="height:78%;opacity:.5"></span>
+              </div>
+              <span class="note">Steady this week</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROBLEM + SOLUTION ========== -->
 <section class="problem">
-  <div class="wrap narrow reveal">
-    <p class="big">You call and they sound fine. But between visits, you have no idea what’s really happening.</p>
-    <p>There’s nothing between GP appointments that happen every three to six months. No early warning. No objective picture. Just guilt, worry, and guesswork.</p>
+  <div class="wrap narrow center reveal">
+    <p class="lede">You call, and she sounds fine. You ask the same few things. Has she eaten, did she sleep. And she tells you not to fuss.</p>
+    <p>Then you hang up, and the wondering starts. A phone call can&rsquo;t show you the days in between, and neither can a GP visit every three to six months. No early warning. No real picture. Just guilt, worry, and guesswork.</p>
     <p class="bridge">Neare fills that gap: a continuous, gentle signal so you notice changes weeks before they become a crisis.</p>
   </div>
 </section>
@@ -1094,47 +1441,34 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <section id="how" class="how">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">Three simple steps</p>
       <h2>How it works</h2>
-      <p class="sub">No cameras, no wearables, and nothing for your parent to set up, charge or remember. One plug-in sensor. Neare does the rest.</p>
+      <p class="sub">Three quiet steps, then it looks after itself.</p>
     </div>
     <div class="grid-3">
 
       <article class="card reveal">
-        <span class="step-num" aria-hidden="true">01</span>
-        <span class="icon-tile">
-          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="20" y="18" width="24" height="28" rx="6"/>
-            <circle cx="32" cy="30" r="3.5"/>
-            <path d="M32 42h.01"/>
-            <path d="M44 34c3 0 5-2 5-5M20 34c-3 0-5-2-5-5"/>
-          </svg>
-        </span>
+        <div class="step-photo">
+          <img src="assets/hero-bg.webp" alt="A Neare sensor at rest on a sideboard in a sunlit home" style="object-position:20% center" loading="lazy" decoding="async">
+        </div>
+        <span class="step-dot" aria-hidden="true">1</span>
         <h3>Place the sensor</h3>
-        <p>A small plug-in radar device. No cameras, no wearables, nothing for your parent to do. It works quietly in the background. Most people forget it’s there.</p>
+        <p>A small home sensor, about the size of a paperback. Plug it in, set it on a shelf or sideboard, and forget it&rsquo;s there. Nothing to wear, nothing to charge, nothing for your parent to do.</p>
       </article>
 
       <article class="card reveal">
-        <span class="step-num" aria-hidden="true">02</span>
-        <span class="icon-tile">
-          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 38 Q16 20 24 38 T40 38 T56 38"/>
-            <circle cx="56" cy="38" r="3"/>
-          </svg>
-        </span>
+        <div class="step-photo">
+          <img src="assets/Gemini_Generated_Image_1kr2m1kr2m1kr2m1.jpeg" alt="A phone face up on a kitchen table beside a coffee cup, showing a calm day" loading="lazy" decoding="async">
+        </div>
+        <span class="step-dot" aria-hidden="true">2</span>
         <h3>Neare learns their rhythm</h3>
         <p>Over the first two weeks it builds a picture of what normal looks like, then watches for meaningful changes, not noise. No false alarms. No alert fatigue.</p>
       </article>
 
       <article class="card reveal">
-        <span class="step-num" aria-hidden="true">03</span>
-        <span class="icon-tile">
-          <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="18" y="10" width="28" height="44" rx="6"/>
-            <path d="M26 24h12M26 32h12M26 40h8"/>
-            <circle cx="32" cy="50" r="1.5" fill="currentColor"/>
-          </svg>
-        </span>
+        <div class="step-photo">
+          <img src="assets/Gemini_Generated_Image_7gz8xy7gz8xy7gz8.jpeg" alt="Neare open on a phone propped beside a laptop while she works" loading="lazy" decoding="async">
+        </div>
+        <span class="step-dot" aria-hidden="true">3</span>
         <h3>You get guidance, not data</h3>
         <p>When something shifts, Neare tells you what changed, what it might mean, and what to do. Share a GP-ready summary in one tap.</p>
       </article>
@@ -1143,226 +1477,203 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ========== IN PRACTICE ========== -->
+<!-- ========== GUIDANCE (the one gentle change) ========== -->
 <section class="practice">
-  <div class="wrap">
-    <div class="practice-grid">
-      <div class="practice-copy reveal">
-        <p class="eyebrow">In practice</p>
-        <h2>Not just alerts.<br>Guidance you can act on.</h2>
-        <p>When Neare spots a change, it doesn't just flag it. It explains what's different, why it might matter, and gives you a clear next step, so you never feel helpless.</p>
-        <p>No medical jargon. No data overload. Just a calm, clear voice saying: here's what's happening, and here's what you can do.</p>
-        <p class="pull">"Dad's been getting up more at night. Here's what that might mean, and a summary you can share with his GP."</p>
-      </div>
-      <div class="phone-stage reveal">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="phone-back">
-              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 2L4 8l6 6"/></svg>
-              Back to Today
+  <div class="wrap split">
+    <div class="phone-stage reveal">
+      <div class="phone" style="width:300px">
+        <div class="phone-screen" style="height:652px;box-sizing:border-box;display:flex;flex-direction:column">
+          <div class="phone-notch"></div>
+          <div data-appscreen style="display:contents">
+            <div class="as-head">
+              <span class="brand">neare</span>
+              <span class="meta">Insight</span>
             </div>
-            <div class="alert-hero">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-              <p>Dad's been getting up at night more often this week.</p>
+            <span class="wellpill as-pill"><i></i> A gentle change</span>
+            <p class="as-h sm">A little more time in the bathroom.</p>
+            <p class="as-sub">Three mornings this week, up from her usual one. Nothing urgent, just worth a gentle look.</p>
+            <div class="as-card as-pop" data-app-pop>
+              <p class="as-kicker">What this can mean</p>
+              <p style="font-size:13.5px;line-height:1.5;color:var(--navy);margin:0">Often a minor water infection or a small change in routine, usually simple to sort when you catch it early.</p>
             </div>
-
-            <div class="context-card">
-              <p class="phone-label">What we noticed</p>
-              <p>Night-time movement increased to 3 of the last 7 nights, up from his usual average of 1. The pattern started 5 days ago.</p>
-            </div>
-
-            <div class="guided">
-              <div class="guided-step">
-                <span class="num">1</span>
-                <div>
-                  <p class="step-title">Have a gentle conversation</p>
-                  <div class="speech">"Dad, have you been sleeping okay? I noticed you've been a bit restless."</div>
-                </div>
-              </div>
-              <div class="guided-step">
-                <span class="num">2</span>
-                <div>
-                  <p class="step-title">Check for common causes</p>
-                  <div class="speech">Pain, new medication, needing the loo more, anxiety: all worth ruling out.</div>
-                </div>
-              </div>
-              <div class="guided-step">
-                <span class="num">3</span>
-                <div>
-                  <p class="step-title">Share with his GP</p>
-                  <span class="phone-btn" style="display:inline-block;width:auto;margin-top:6px;">Share GP-ready summary</span>
-                </div>
-              </div>
-            </div>
-
-            <p class="phone-closer">Neare gives you the words, not just the data.</p>
-
-            <div class="phone-tabs">
-              <span class="phone-tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                Today
-              </span>
-              <span class="phone-tab active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-8"/></svg>
-                Summary
-              </span>
-              <span class="phone-tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                Family
-              </span>
+            <div class="as-cta">
+              <p class="phone-btn">See what to do &rarr;</p>
+              <p style="text-align:center;margin:12px 0 0"><a href="#join" style="font-size:13px;color:var(--sage-deep);font-weight:600">Share a summary with her GP</a></p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-copy reveal">
+      <p class="eyebrow">In practice</p>
+      <h2>Not just alerts.<br>Guidance you can act on.</h2>
+      <p>When Neare notices a change, it doesn&rsquo;t just flag it. It explains what&rsquo;s different, why it might matter, and gives you a clear next step, so you&rsquo;re never left guessing.</p>
+      <div class="worked">
+        <div class="worked-row">
+          <span class="n" aria-hidden="true">1</span>
+          <div><p class="lead">What we noticed</p><p>A little more time in the bathroom than usual. Three mornings, up from her usual one.</p></div>
+        </div>
+        <div class="worked-row">
+          <span class="n" aria-hidden="true">2</span>
+          <div><p class="lead">A gentle conversation</p><p>How to ask how she&rsquo;s feeling in herself, without making it a fuss.</p></div>
+        </div>
+        <div class="worked-row">
+          <span class="n" aria-hidden="true">3</span>
+          <div><p class="lead">Common causes</p><p>What this often turns out to be, and which ones are simple to sort early.</p></div>
+        </div>
+        <div class="worked-row">
+          <span class="n" aria-hidden="true">4</span>
+          <div><p class="lead">Share with her GP</p><p>A clear, one-page summary of what changed, ready to send in a tap.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========== BENEFITS ========== -->
+<!-- ========== WHY CAREGIVERS WANT IT ========== -->
 <section class="benefits">
   <div class="wrap">
     <h2 class="reveal">Why caregivers want it</h2>
     <div class="grid-3">
 
-      <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="32" cy="32" r="22"/>
-          <path d="M32 20v12l8 5"/>
-        </svg>
+      <div class="card reveal">
+        <div class="benefit-photo">
+          <img src="assets/Gemini_Generated_Image_8xiqk8xiqk8xiqk8.jpeg" alt="A daughter at her kitchen window with a mug of tea, unhurried" loading="lazy" decoding="async">
+        </div>
         <h3>Stop finding out too late.</h3>
-        <p>Neare catches sleep changes, routine shifts and movement patterns weeks before they become visible to you.</p>
-      </article>
+        <p>Neare catches sleep changes, routine shifts and movement patterns weeks before they&rsquo;d otherwise become visible to you.</p>
+      </div>
 
-      <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 34 L32 16 L54 34 V52 H10 Z"/>
-          <path d="M28 52 V38 H36 V52"/>
-        </svg>
+      <div class="card reveal">
+        <div class="benefit-photo">
+          <img src="assets/Gemini_Generated_Image_i1a0dyi1a0dyi1a0.jpeg" alt="An adult son out for a walk on his own street, at ease" loading="lazy" decoding="async">
+        </div>
         <h3>The reassurance of presence, without being there.</h3>
-        <p>A quiet background layer of awareness, even when you live an hour away.</p>
-      </article>
+        <p>A quiet background layer of awareness, even when you live an hour away, or a continent.</p>
+      </div>
 
-      <article class="card reveal">
-        <svg class="card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M32 54 C 18 42 10 32 18 22 C 24 15 32 20 32 28 C 32 20 40 15 46 22 C 54 32 46 42 32 54 Z"/>
-        </svg>
+      <div class="card reveal">
+        <div class="benefit-photo">
+          <img src="assets/Gemini_Generated_Image_2b9yaj2b9yaj2b9y.jpeg" alt="Her father making tea in his own kitchen, at home and capable" loading="lazy" decoding="async">
+        </div>
         <h3>The best care keeps them where they want to be.</h3>
-        <p>Earlier intervention means fewer crises, fewer hospital trips and more time at home.</p>
-      </article>
+        <p>Earlier, gentler intervention means fewer crises, fewer hospital trips, and more time at home.</p>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ========== OBJECTIONS ========== -->
+<!-- ========== FOR THEM ========== -->
+<section class="forthem">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="forthem-photo">
+        <img src="assets/forthem-garden.jpeg" alt="Her mother pruning roses in her own garden in the evening light" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">For them</p>
+      <h2>They shouldn&rsquo;t have to feel watched to be looked after.</h2>
+      <p>Neare sits as lightly in your parent&rsquo;s life as a plug socket. It notices the rhythm of an ordinary day: the getting up, the kettle, the moving about. Never images, never sound.</p>
+      <div class="promises">
+        <span><b>&#10003;</b> No cameras</span>
+        <span><b>&#10003;</b> No microphones</span>
+        <span><b>&#10003;</b> Nothing to wear</span>
+        <span><b>&#10003;</b> Nothing to charge</span>
+        <span><b>&#10003;</b> Nothing to learn or remember</span>
+      </div>
+      <p class="closer">They stay exactly who they are: at home, independent, getting on with the day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== OUTCOMES BAND ========== -->
+<section class="outcomes">
+  <div class="wrap">
+    <div class="outcomes-grid reveal">
+      <div>
+        <p class="fig">200+</p>
+        <p class="cap">families already on the early access list</p>
+      </div>
+      <div>
+        <p class="fig">2 weeks</p>
+        <p class="cap">to learn what an ordinary day looks like for them</p>
+      </div>
+      <div>
+        <p class="fig">&pound;29<small>/mo</small></p>
+        <p class="cap">sensor and app included, first month free</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FULL-BLEED PHOTO BREAK ========== -->
+<section class="photo-break">
+  <img src="assets/banner-home.jpeg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  <div class="scrim"></div>
+  <div class="wrap">
+    <p class="reveal">Life carries on as it always has. You just spend less of it wondering.</p>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
 <section class="objections">
   <div class="wrap">
     <h2 class="reveal">What caregivers asked us</h2>
 
-    <details class="reveal">
-      <summary>Will it actually work?</summary>
-      <p>Neare uses clinically-informed radar sensing, the same technology used in hospital fall detection, to track gait, sleep and daily routine. No false alarms from the cat. We’re building with families, not just for them.</p>
+    <details class="reveal" open>
+      <summary>Will they feel watched?</summary>
+      <p>No cameras. No microphones. No wearables. The sensor reads movement patterns, not images, so it never sees or hears anything. It&rsquo;s about the size of a paperback and stays out of sight.</p>
     </details>
 
     <details class="reveal">
-      <summary>Will they feel watched?</summary>
-      <p>No cameras. No microphones. No wearables. The sensor reads movement patterns, not images. It’s about the size of a phone charger and stays out of sight.</p>
+      <summary>Will it actually work?</summary>
+      <p>Neare is built with clinicians and families, not just for them. It learns your parent&rsquo;s own rhythm over the first couple of weeks, then watches for meaningful changes rather than one-off blips, so you get a real signal, not false alarms from the cat.</p>
     </details>
 
     <details class="reveal">
       <summary>What makes Neare different?</summary>
-      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It’s a single plug-in device that sees movement, not images (the same radar technology used in hospital fall detection), so your parent keeps their privacy and their independence. And instead of dumping raw data on you, Neare tells you only when something has meaningfully changed, and what to do about it.</p>
+      <p>Most home-monitoring products are either cameras pointed at your parent or wearables they have to remember to put on. Neare is neither. It&rsquo;s a single small sensor that reads movement, not images, so your parent keeps their privacy and independence.</p>
     </details>
 
     <details class="reveal">
-      <summary>Is it worth £29 a month?</summary>
-      <p>Most families already spend £50–150 a month on care support. Neare costs less than a weekly cleaner, and it’s watching every hour, not just one afternoon.</p>
+      <summary>Is it worth &pound;29 a month?</summary>
+      <p>Most families already spend &pound;50&ndash;150 a month on care support. Neare costs less than a weekly cleaner, and it&rsquo;s there every hour of every day, not just one afternoon a week.</p>
     </details>
+
   </div>
 </section>
 
 <!-- ========== WHAT'S INCLUDED ========== -->
 <section class="included">
   <div class="wrap">
-    <h2 class="reveal">What's included</h2>
+    <h2 class="reveal">What&rsquo;s included</h2>
     <div class="included-grid">
 
       <article class="included-card reveal">
-        <svg class="sensor-illustration" viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
-          <!-- surface / shelf -->
-          <path d="M40 132 Q140 126 240 132" stroke="#C9B99A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="140" cy="134" rx="60" ry="4" fill="#2C3E50" opacity=".05"/>
-
-          <!-- radar rings -->
-          <ellipse cx="140" cy="90" rx="80" ry="36" fill="none" stroke="#8FA98F" stroke-opacity=".15" stroke-width="1" stroke-dasharray="3 5"/>
-          <ellipse cx="140" cy="90" rx="56" ry="25" fill="none" stroke="#8FA98F" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 5"/>
-          <ellipse cx="140" cy="90" rx="34" ry="15" fill="none" stroke="#8FA98F" stroke-opacity=".35" stroke-width="1"/>
-
-          <!-- device body - cylinder -->
-          <path d="M118 130 L118 88 Q118 72 140 68 Q162 72 162 88 L162 130" fill="#FBFAF6" stroke="#D6D1C8" stroke-width="1.2"/>
-          <!-- domed top -->
-          <ellipse cx="140" cy="88" rx="22" ry="8" fill="#FBFAF6" stroke="#D6D1C8" stroke-width="1.2"/>
-          <ellipse cx="140" cy="86" rx="18" ry="6" fill="none" stroke="#E8E3DA" stroke-width=".8"/>
-          <!-- dome highlight -->
-          <path d="M126 84 Q140 74 154 84" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
-          <!-- subtle top surface -->
-          <ellipse cx="140" cy="68" rx="10" ry="3" fill="none" stroke="#E8E3DA" stroke-width=".6"/>
-
-          <!-- base edge -->
-          <ellipse cx="140" cy="130" rx="22" ry="4" fill="#F0EBE2" stroke="#D6D1C8" stroke-width=".8"/>
-
-          <!-- soft glow behind device -->
-          <ellipse cx="140" cy="100" rx="28" ry="20" fill="#8FA98F" opacity=".06"/>
-        </svg>
-        <h3>The Neare sensor</h3>
-        <p>A small, matte-white device about the size of a candle. No screen, no LEDs, no buttons. Plug it in, place it on a shelf or side table, and forget it's there.</p>
-        <p>It uses radar, not cameras or microphones, to read movement patterns throughout the home. Your parent's privacy stays completely intact.</p>
-        <p class="detail">Included with your subscription · No upfront cost · Plug-in, no installation</p>
+        <div class="step-photo" style="aspect-ratio:16/10;border-radius:0;border:0;box-shadow:none;margin:0">
+          <img src="assets/hero-bg.webp" alt="The Neare sensor on a sideboard at home, beside framed photographs" loading="lazy" decoding="async">
+        </div>
+        <div class="included-body">
+          <h3>The Neare sensor</h3>
+          <p>A small, matte-white device about the size of a paperback. No screen, no lights, no buttons. Plug it in, set it on a shelf or side table, and forget it&rsquo;s there.</p>
+          <p>It reads the movement patterns of the home, never cameras, never microphones, so your parent&rsquo;s privacy stays completely intact.</p>
+          <p class="incl-note">Included with your subscription &middot; No upfront cost &middot; Plug in, no installation</p>
+        </div>
       </article>
 
       <article class="included-card reveal">
-        <svg class="sensor-illustration" viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
-          <!-- soft glow behind phone -->
-          <ellipse cx="140" cy="96" rx="32" ry="22" fill="#8FA98F" opacity=".06"/>
-          <!-- phone body -->
-          <rect x="105" y="14" width="70" height="128" rx="14" fill="#FBFAF6" stroke="#D6D1C8" stroke-width="1.2"/>
-          <!-- notch -->
-          <rect x="126" y="18" width="28" height="6" rx="3" fill="#E8E3DA"/>
-          <!-- screen area -->
-          <rect x="113" y="30" width="54" height="100" rx="4" fill="none"/>
-          <!-- brand -->
-          <text x="118" y="42" font-family="DM Sans,sans-serif" font-size="6" font-weight="700" fill="#2C3E50" letter-spacing="-.02em">neare</text>
-          <!-- title -->
-          <text x="118" y="54" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" fill="#2C3E50">Today</text>
-          <!-- status pill -->
-          <rect x="118" y="59" width="44" height="10" rx="5" fill="#E4ECE2"/>
-          <circle cx="123" cy="64" r="2" fill="#6E8A6D"/>
-          <text x="128" y="66.5" font-family="DM Sans,sans-serif" font-size="4.5" font-weight="600" fill="#6E8A6D">All looks well</text>
-          <!-- rhythm bars -->
-          <rect x="118" y="76" width="44" height="26" rx="6" fill="#EDE5D6"/>
-          <rect x="122" y="92" width="4" height="6" rx="1" fill="#8FA98F" opacity=".45"/>
-          <rect x="128" y="88" width="4" height="10" rx="1" fill="#8FA98F" opacity=".65"/>
-          <rect x="134" y="90" width="4" height="8" rx="1" fill="#8FA98F" opacity=".35"/>
-          <rect x="140" y="86" width="4" height="12" rx="1" fill="#8FA98F" opacity=".55"/>
-          <rect x="146" y="89" width="4" height="9" rx="1" fill="#8FA98F" opacity=".7"/>
-          <rect x="152" y="84" width="4" height="14" rx="1" fill="#8FA98F" opacity=".5"/>
-          <!-- alert card -->
-          <rect x="118" y="106" width="44" height="18" rx="6" fill="#EDE5D6"/>
-          <circle cx="124" cy="113" r="3" fill="none" stroke="#C87A5C" stroke-width=".8"/>
-          <text x="124" y="115" font-family="DM Sans,sans-serif" font-size="3.5" fill="#C87A5C" text-anchor="middle" font-weight="700">!</text>
-          <text x="130" y="113" font-family="DM Sans,sans-serif" font-size="4" font-weight="600" fill="#2C3E50">New insight</text>
-          <text x="130" y="119" font-family="DM Sans,sans-serif" font-size="3.5" fill="#6B7A88">Tap to view →</text>
-          <!-- home button hint -->
-          <rect x="132" y="132" width="16" height="3" rx="1.5" fill="#D6D1C8"/>
-          <!-- surface line -->
-          <path d="M60 146 Q140 140 220 146" stroke="#C9B99A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="140" cy="148" rx="40" ry="3" fill="#2C3E50" opacity=".04"/>
-        </svg>
-        <h3>The Neare app</h3>
-        <p>A calm, clear window into your parent's daily rhythm. See at a glance whether their day looks normal, and get guidance when something shifts.</p>
-        <p>Share updates with family members. Export GP-ready summaries in one tap. No data overload, just the information that matters.</p>
-        <p class="detail">iOS + Android · Invite up to 5 family members · Weekly email summaries</p>
+        <div class="step-photo" style="aspect-ratio:16/10;border-radius:0;border:0;box-shadow:none;margin:0">
+          <img src="assets/Gemini_Generated_Image_8lufrd8lufrd8luf.jpeg" alt="The Neare app open on a phone on a kitchen table over morning coffee" loading="lazy" decoding="async">
+        </div>
+        <div class="included-body">
+          <h3>The Neare app</h3>
+          <p>A calm, clear window into your parent&rsquo;s daily rhythm. See at a glance whether their day looks like them, and get guidance when something shifts.</p>
+          <p>Share updates with the family. Export a GP-ready summary in one tap. No data overload. Just the things that matter.</p>
+          <p class="incl-note">iOS + Android &middot; Invite up to 5 family members &middot; Weekly email summaries</p>
+        </div>
       </article>
 
     </div>
@@ -1375,8 +1686,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     <h2 class="reveal">Simple, honest pricing</h2>
     <div class="price-card reveal">
       <p class="eyebrow">Early access</p>
-      <div class="price"><span class="amt">£29</span><span class="per">/month</span></div>
-      <p class="incl">Includes sensor + app. No hidden fees.</p>
+      <div class="price"><span class="amt">&pound;29</span><span class="per">/month</span></div>
+      <p class="incl">Includes the sensor and the app. No hidden fees.</p>
       <p class="incl">No contract. Cancel anytime. <strong>First month free.</strong></p>
       <p class="anchor">Less than the cost of a single private home visit.</p>
       <a class="btn" href="#join" data-pricing-cta>Get early access at launch price</a>
@@ -1384,13 +1695,16 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ========== SOCIAL PROOF ========== -->
+<!-- ========== WHAT FAMILIES TELL US ========== -->
 <section class="proof">
   <div class="wrap">
-    <h2 class="reveal">Families already trying Neare</h2>
+    <div class="section-head reveal">
+      <h2>What families tell us</h2>
+      <p class="sub">From our early-access research conversations. Shared with permission.</p>
+    </div>
     <div class="quotes" data-quote-wall>
 
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>I used to call Dad every evening just to hear his voice and feel okay about it. Now I actually know he slept, he’s eating, he’s getting out of bed at the right time. It’s taken a weight off I didn’t realise I was carrying.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">SM</div>
@@ -1401,7 +1715,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>Mum was adamant she didn’t want a camera in the house and I agreed with her. Neare is the first thing we’ve both been comfortable with. She forgets it’s there, and I finally stopped lying awake at 2am.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">JT</div>
@@ -1412,7 +1726,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>We caught a change in her sleep pattern three weeks before her GP appointment. Turned out to be the start of a UTI. I can’t overstate what catching that early meant for us.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">PK</div>
@@ -1423,8 +1737,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>I can’t sleep unless I know what she’s doing. Mom fell taking a shower at three in the morning, and the bathroom is the one place I’d never put a camera. I wouldn’t do that to her. Knowing she’s in and out safely, that she made it down the stairs: that’s the gap nothing else covers.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">SV</div>
@@ -1435,7 +1748,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>Her watch can tell me when she’s fallen. It stops her from dying. It doesn’t stop the fall. We’re past detection; we want to prevent something. And with Mum, what she says and what she does are two different things. Seeing the real pattern, even when I’m travelling, is one less thing to worry about.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">KH</div>
@@ -1446,7 +1759,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-      <figure class="testimonial reveal">
+      <figure class="testimonial">
         <blockquote>Mum had an eye operation under general anaesthetic and didn’t tell me until I was back from my holiday. She didn’t want to spoil it. She’s not always good at telling me what’s wrong. So just seeing the basics (she’s sleeping, she’s eating, she’s moving around) is reassuring in itself. If she stopped going into the kitchen, I’d know to ask why.</blockquote>
         <figcaption>
           <div class="avatar" aria-hidden="true">JB</div>
@@ -1457,32 +1770,25 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         </figcaption>
       </figure>
 
-      <!-- 6 quotes = 2 per column. The scrolling columns need at least 6 cards;
-           below that the section falls back to a static 3-up grid. Add quotes in
-           multiples of 3 to keep the columns even. -->
     </div>
-    <p class="meta reveal">
-      Join <strong>200+ families</strong> on the early access list<br>
-      Developed with clinicians and sensor engineers
-    </p>
   </div>
 </section>
 
 <!-- ========== FINAL CTA ========== -->
 <section id="join" class="final">
   <div class="wrap narrow reveal">
-    <h2>You shouldn’t have to wonder if they’re okay.</h2>
+    <h2>You shouldn&rsquo;t have to wonder if they&rsquo;re okay.</h2>
+    <p>Join <strong>200+ families</strong> on the early access list.</p>
     <form class="capture" data-form>
       <label class="sr" for="email-2">Email address</label>
       <input id="email-2" type="email" name="email" required placeholder="your@email.com" autocomplete="email">
       <button type="submit">Join the early access list</button>
       <p class="form-msg" data-msg></p>
     </form>
-    <p class="reassure">We’ll let you know when Neare is ready. No spam, ever.</p>
+    <p class="meta">Developed with clinicians and sensor engineers.</p>
   </div>
 </section>
 
-</main>
 
 <footer>
   <div class="wrap foot">
@@ -1524,9 +1830,127 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: .1 });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    // Safety net: never leave anything hidden (print, screenshots, no scroll).
+    setTimeout(function () {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    }, 1600);
   } else {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
   }
+
+  // ---------- Phone screens populate, hold, fade, repeat while in view ----------
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var screens = Array.prototype.slice.call(document.querySelectorAll('[data-appscreen]'));
+    if (!screens.length || reduce) return;
+
+    var EASE = 'cubic-bezier(.4,0,.2,1)';
+    // A gentle overshoot, like a chat bubble landing.
+    var POP_EASE = 'cubic-bezier(.18,.9,.32,1.06)';
+
+    screens.forEach(function (scr) {
+      var pops = Array.prototype.slice.call(scr.querySelectorAll('[data-app-pop]'));
+      var items = Array.prototype.slice.call(scr.children).filter(function (el) {
+        return !el.hasAttribute('data-app-pop');
+      });
+      var bars = Array.prototype.slice.call(scr.querySelectorAll('[data-app-bar]'));
+      var line = scr.querySelector('[data-app-line]');
+      var lineLen = 0;
+
+      items.forEach(function (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        el.style.transition = 'opacity .55s ' + EASE + ', transform .55s ' + EASE;
+      });
+      pops.forEach(function (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(.86) translateY(6px)';
+        el.style.transition = 'opacity .32s ' + EASE + ', transform .42s ' + POP_EASE;
+      });
+      bars.forEach(function (b) {
+        b.style.transformOrigin = 'bottom';
+        b.style.transform = 'scaleY(0)';
+        b.style.transition = 'transform .5s ' + EASE;
+      });
+      if (line && line.getTotalLength) {
+        try {
+          lineLen = line.getTotalLength();
+          line.style.strokeDasharray = String(lineLen);
+          line.style.strokeDashoffset = String(lineLen);
+          line.style.transition = 'stroke-dashoffset 1.1s ' + EASE;
+        } catch (e) {}
+      }
+
+      var base = items.length * 90;
+      var buildMs = base + 1100; // longest transition is the line draw
+      var HOLD = 2600;
+      var GAP = 700;
+      var visible = false;
+      var timers = [];
+      function clear() { timers.forEach(clearTimeout); timers = []; }
+
+      function play() {
+        items.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 90) + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        if (line) {
+          line.style.transitionDelay = Math.max(0, base - 140) + 'ms';
+          line.style.strokeDashoffset = '0';
+        }
+        bars.forEach(function (b, i) {
+          b.style.transitionDelay = (base + i * 55) + 'ms';
+          b.style.transform = 'scaleY(1)';
+        });
+        pops.forEach(function (el, i) {
+          el.style.transitionDelay = (base + 420 + i * 260) + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }
+
+      function reset() {
+        items.forEach(function (el) {
+          el.style.transitionDelay = '0ms';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(10px)';
+        });
+        if (line) { line.style.transitionDelay = '0ms'; line.style.strokeDashoffset = String(lineLen); }
+        bars.forEach(function (b) { b.style.transitionDelay = '0ms'; b.style.transform = 'scaleY(0)'; });
+        pops.forEach(function (el) {
+          el.style.transitionDelay = '0ms';
+          el.style.opacity = '0';
+          el.style.transform = 'scale(.86) translateY(6px)';
+        });
+      }
+
+      function cycle() {
+        if (!visible) return;
+        play();
+        timers.push(setTimeout(function () {
+          if (!visible) return;
+          reset();
+          timers.push(setTimeout(cycle, GAP + 550));
+        }, buildMs + HOLD));
+      }
+
+      if (!('IntersectionObserver' in window)) { play(); return; }
+      var pio = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) {
+            if (visible) return;
+            visible = true; clear(); cycle();
+          } else {
+            visible = false; clear();
+          }
+        });
+      }, { threshold: .2 });
+      pio.observe(scr.parentElement || scr);
+      // Failsafe: never leave a phone screen blank.
+      setTimeout(function () { if (!visible) play(); }, 1700);
+    });
+  })();
 
   // ---------- Testimonial columns ----------
   // Progressive enhancement: the markup is a plain grid. We only rearrange it
@@ -1543,7 +1967,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     if (reduce || cards.length < MIN_TO_SCROLL) return;
 
     var perCol = Math.ceil(cards.length / COLS);
-    var durations = ['34s', '42s', '38s'];
+    var durations = ['34s', '27s', '40s'];
     var breakpoints = ['', 'md-up', 'lg-up'];
     var built = [];
 
