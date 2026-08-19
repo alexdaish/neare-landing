@@ -458,48 +458,6 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 
   /* ---------- PRICING ---------- */
   .pricing { background: var(--stone); text-align: center; }
-  .price-card {
-    background: var(--stone-warm);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 56px 40px 48px;
-    max-width: 520px;
-    margin: 0 auto;
-    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 24px 56px rgba(44, 62, 80, .08);
-    position: relative;
-    overflow: hidden;
-  }
-  .price-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(120% 60% at 50% 0%, rgba(143, 169, 143, .14), transparent 60%);
-    pointer-events: none;
-  }
-  .price-card > * { position: relative; }
-  .price {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 6px;
-    margin: 8px 0 20px;
-  }
-  .price .amt {
-    font-size: clamp(56px, 8vw, 72px);
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: -.03em;
-    line-height: 1;
-  }
-  .price .per { font-size: 19px; color: var(--mute); font-weight: 500; }
-  .price-card .incl { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
-  .price-card .anchor {
-    color: var(--mute);
-    font-size: 14px;
-    max-width: 360px;
-    margin: 16px auto 32px;
-    font-style: italic;
-  }
   .btn {
     display: inline-block;
     background: var(--terracotta);
@@ -1317,6 +1275,123 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   /* The refreshed hero sits on plain stone, not the old photographic background. */
   .hero { background-image: none; background: var(--stone); }
 
+
+  /* ========== INCREMENTAL: sage glows, navy stats band, waitlist tiers ========== */
+
+  /* A soft sage pool layered over each section's solid fill. The gradient is
+     listed first so the fill still shows through underneath. */
+  .hero       { background: radial-gradient(ellipse 62% 58% at 82% 38%, rgba(143, 169, 143, .38) 0%, transparent 60%), var(--stone); }
+  .dashboard  { background: radial-gradient(ellipse 50% 58% at 88% 50%, rgba(143, 169, 143, .34) 0%, transparent 58%), var(--stone-warm); }
+  .problem    { background: radial-gradient(ellipse 58% 70% at 50% 100%, rgba(143, 169, 143, .30) 0%, transparent 62%), var(--stone); }
+  .how        { background: radial-gradient(ellipse 46% 52% at 8% 12%, rgba(143, 169, 143, .30) 0%, transparent 58%), var(--stone-warm); }
+  .benefits   { background: radial-gradient(ellipse 50% 56% at 92% 88%, rgba(143, 169, 143, .32) 0%, transparent 58%), var(--stone-warm); }
+  .forthem    { background: radial-gradient(ellipse 54% 70% at 20% 50%, rgba(143, 169, 143, .38) 0%, transparent 58%), var(--stone); }
+  .objections { background: radial-gradient(ellipse 60% 46% at 50% 0%, rgba(143, 169, 143, .28) 0%, transparent 60%), var(--stone-warm); }
+  .included   { background: radial-gradient(ellipse 48% 56% at 10% 90%, rgba(143, 169, 143, .30) 0%, transparent 58%), var(--stone); }
+  .pricing    { background: radial-gradient(ellipse 58% 58% at 50% 18%, rgba(143, 169, 143, .40) 0%, transparent 58%), var(--stone-warm); }
+  .proof      { background: radial-gradient(ellipse 72% 54% at 50% 34%, rgba(143, 169, 143, .30) 0%, transparent 60%), var(--stone); }
+  .final      { background: radial-gradient(ellipse 60% 66% at 50% 44%, rgba(143, 169, 143, .42) 0%, transparent 58%), var(--stone-warm); }
+
+  /* A centred sage-soft pool behind each phone. */
+  .phone-stage { background: radial-gradient(ellipse 58% 54% at 50% 47%, var(--sage-soft) 0%, transparent 72%); }
+
+  /* ---------- STATS BAND: the page's one high-contrast beat ---------- */
+  .outcomes { position: relative; overflow: hidden; background: var(--navy); }
+  .outcomes-glow {
+    position: absolute;
+    left: 50%;
+    top: -30%;
+    width: min(760px, 90%);
+    height: 120%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 40%, rgba(143, 169, 143, .28) 0%, transparent 62%);
+  }
+  .outcomes .wrap { position: relative; }
+  .outcomes .fig { color: var(--stone); }
+  .outcomes .cap { color: rgba(245, 240, 232, .72); }
+  .outcomes .cap b { color: var(--sage); font-weight: 600; }
+
+  /* ---------- PRICING: waitlist tiers ---------- */
+  .section-head h2 { margin-bottom: 0; }
+  .pricing .section-head { max-width: 560px; }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    max-width: 840px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .tier {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 36px 34px 34px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier > * { position: relative; }
+  /* No --shadow-card token exists in this page, so these match the literal
+     two-layer navy-tinted shadows used by the other cards. */
+  .tier--featured {
+    background: var(--stone);
+    border: 1.5px solid var(--sage);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 24px 56px rgba(44, 62, 80, .08);
+  }
+  .tier--featured::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(120% 62% at 50% 0%, rgba(143, 169, 143, .24), transparent 60%);
+  }
+  .tier--plain {
+    background: var(--stone-warm);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04), 0 12px 32px rgba(44, 62, 80, .06);
+  }
+  .tier-pill {
+    align-self: flex-start;
+    border-radius: 999px;
+    padding: 6px 13px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin-bottom: 18px;
+  }
+  .tier--featured .tier-pill { background: var(--sage-soft); color: var(--sage-deep); }
+  .tier--plain .tier-pill { background: var(--stone); border: 1px solid var(--line); color: var(--navy-soft); }
+  .tier-head {
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -.025em;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+  .tier-sub { color: var(--mute); font-size: 15px; margin: 0 0 22px; }
+  .tier-list {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .tier-list li { display: flex; gap: 10px; font-size: 15.5px; line-height: 1.5; color: var(--navy); }
+  .tier-list li::before { content: "\2713"; color: var(--sage-deep); font-weight: 700; flex-shrink: 0; }
+  .tier .btn { margin-top: auto; }
+  .btn--block { display: block; width: 100%; text-align: center; }
+  .btn--quiet {
+    background: var(--stone);
+    color: var(--navy);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .04);
+  }
+  .btn--quiet:hover { background: #fff; color: var(--navy); }
+  .tier-note { color: var(--mute); font-size: 13.5px; margin: 26px auto 0; text-align: center; }
+
 </style>
 </head>
 
@@ -1351,11 +1426,11 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         <div class="dip">
           <div class="dip-frame">
             <img src="assets/hero-child.jpeg" alt="An adult daughter cooking in her own kitchen, unhurried" loading="eager" decoding="async">
-            <span class="dip-cap">You &middot; Kent</span>
+            <span class="dip-cap">You &middot; Chicago</span>
           </div>
           <div class="dip-frame">
             <img src="assets/hero-parent.jpeg" alt="Her mother watering plants in her own bright sitting room" loading="eager" decoding="async">
-            <span class="dip-cap">Mum &middot; Yorkshire</span>
+            <span class="dip-cap">Mom &middot; Tucson</span>
           </div>
         </div>
         <img class="hero-sensor" src="assets/neare-sensor.png" alt="" width="456" height="456" aria-hidden="true" decoding="async">
@@ -1380,7 +1455,7 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 </section>
 
 <!-- ========== DASHBOARD PREVIEW (the calm good day) ========== -->
-<section class="benefits">
+<section class="dashboard">
   <div class="wrap split">
     <div class="reveal">
       <p class="eyebrow">Most days</p>
@@ -1589,8 +1664,9 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ========== OUTCOMES BAND ========== -->
+<!-- ========== STATS BAND ========== -->
 <section class="outcomes">
+  <div class="outcomes-glow" aria-hidden="true"></div>
   <div class="wrap">
     <div class="outcomes-grid reveal">
       <div>
@@ -1602,8 +1678,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         <p class="cap">to learn what an ordinary day looks like for them</p>
       </div>
       <div>
-        <p class="fig">&pound;29<small>/mo</small></p>
-        <p class="cap">sensor and app included, first month free</p>
+        <p class="fig">100</p>
+        <p class="cap"><b>free spots</b> for our early adopter families</p>
       </div>
     </div>
   </div>
@@ -1639,8 +1715,8 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
     </details>
 
     <details class="reveal">
-      <summary>Is it worth &pound;29 a month?</summary>
-      <p>Most families already spend &pound;50&ndash;150 a month on care support. Neare costs less than a weekly cleaner, and it&rsquo;s there every hour of every day, not just one afternoon a week.</p>
+      <summary>What will it cost?</summary>
+      <p>Right now, nothing to find out. Our first 100 families join free, and everyone else on the waitlist locks in the launch price for as long as they stay. We&rsquo;ll tell you your spot when you join, and confirm the details before you ever pay anything.</p>
     </details>
 
   </div>
@@ -1683,15 +1759,41 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
 <!-- ========== PRICING ========== -->
 <section class="pricing">
   <div class="wrap">
-    <h2 class="reveal">Simple, honest pricing</h2>
-    <div class="price-card reveal">
+    <div class="section-head reveal">
       <p class="eyebrow">Early access</p>
-      <div class="price"><span class="amt">&pound;29</span><span class="per">/month</span></div>
-      <p class="incl">Includes the sensor and the app. No hidden fees.</p>
-      <p class="incl">No contract. Cancel anytime. <strong>First month free.</strong></p>
-      <p class="anchor">Less than the cost of a single private home visit.</p>
-      <a class="btn" href="#join" data-pricing-cta>Get early access at launch price</a>
+      <h2>Simple, honest pricing.</h2>
+      <p class="sub">The waitlist is the best deal we&rsquo;ll ever offer. The first 100 families join free. Everyone else locks in the launch price for good.</p>
     </div>
+
+    <div class="tiers">
+
+      <article class="tier tier--featured reveal">
+        <span class="tier-pill">First 100 families</span>
+        <p class="tier-head">Free</p>
+        <p class="tier-sub">Sensor and app, at no cost</p>
+        <ul class="tier-list">
+          <li>The Neare sensor, included</li>
+          <li>Full access to the app</li>
+          <li>No contract. Cancel anytime</li>
+        </ul>
+        <a class="btn btn--block" href="#join" data-pricing-cta>Claim a free spot</a>
+      </article>
+
+      <article class="tier tier--plain reveal">
+        <span class="tier-pill">Everyone on the waitlist</span>
+        <p class="tier-head">Launch price,<br>locked in</p>
+        <p class="tier-sub">Held for you when we launch</p>
+        <ul class="tier-list">
+          <li>The best price we&rsquo;ll ever offer</li>
+          <li>Never rises for as long as you stay</li>
+          <li>No hidden fees. No contract</li>
+        </ul>
+        <a class="btn btn--quiet btn--block" href="#join">Join the waitlist</a>
+      </article>
+
+    </div>
+
+    <p class="tier-note">Join now and we&rsquo;ll tell you your spot. First 100 confirmed by email.</p>
   </div>
 </section>
 
