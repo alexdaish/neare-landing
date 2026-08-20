@@ -97,7 +97,7 @@ const WELCOME_HTML = `<!DOCTYPE html>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E4ECE2; border:1px solid rgba(110,138,109,0.30); border-radius:14px;">
                 <tr>
                   <td valign="middle" width="72" style="padding:12px 0 12px 16px;">
-                    <img src="https://getneare.com/assets/amazon-logo.png" width="64" alt="Amazon" style="display:block; width:64px; height:auto;">
+                    <img src="https://getneare.com/assets/amazon-card-logo.png" width="64" alt="Amazon" style="display:block; width:64px; height:auto;">
                   </td>
                   <td valign="middle" style="padding:12px 16px 12px 12px;">
                     <p style="margin:0 0 3px 0; font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:11px; line-height:1.3; font-weight:600; letter-spacing:0.09em; text-transform:uppercase; color:#6E8A6D;">Our thank-you for your time</p>
