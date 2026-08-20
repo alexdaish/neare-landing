@@ -269,7 +269,7 @@ export default async function handler(req, res) {
                 'Das Neare-Team',
             }
           : {
-              subject: "You're on the Neare early access list",
+              subject: "You're on the list. Now, a small favour?",
               // Plain-text alternative. Sent alongside the HTML for clients that
               // block it, and it helps deliverability.
               text:
