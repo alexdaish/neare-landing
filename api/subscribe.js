@@ -205,7 +205,9 @@ export default async function handler(req, res) {
     RESEND_API_KEY,
     RESEND_FROM = 'Neare <hello@getneare.com>',
     FB_ACCESS_TOKEN,
-    FB_PIXEL_ID = '1892352458820371',
+    // The pixel for the ad account we actually spend from. FB_ACCESS_TOKEN must
+    // belong to that same account, or every CAPI call 403s.
+    FB_PIXEL_ID = '4114962422141482',
   } = process.env;
 
   if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
