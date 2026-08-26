@@ -2197,6 +2197,18 @@ src="https://www.facebook.com/tr?id=1892352458820371&ev=PageView&noscript=1"
         .then(function () {
           form.classList.add('success');
           msg.textContent = "You're on the list. We'll be in touch.";
+          // Google Ads conversion. Fires here, not in <head>: there is no
+          // separate thank-you page, so a head snippet would count every page
+          // view as a signup. transaction_id reuses the Meta event id so
+          // Google can discard duplicates too.
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion', {
+              send_to: 'AW-18398745175/vPJgCP720OQcENekmsVE',
+              value: 1.0,
+              currency: 'GBP',
+              transaction_id: eventId
+            });
+          }
         })
         .catch(function (err) {
           btn.disabled = false;
